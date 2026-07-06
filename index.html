@@ -949,6 +949,18 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
       <input class="scanner-input" id="scan-inp" placeholder="Barkod raqami...">
     </div>
     <div id="scan-result"></div>
+
+    <div style="margin-top:14px;padding-top:14px;border-top:1px dashed var(--border)">
+      <button class="btn btn-outline" id="bulk-toggle-btn" onclick="toggleBulkInput()" style="font-size:12px;padding:6px 14px">📋 Ro'yxat orqali qo'shish</button>
+    </div>
+    <div id="bulk-input-wrap" style="display:none;margin-top:12px">
+      <textarea id="bulk-inp" rows="5" placeholder="Barkodlarni bu yerga joylang (paste) yoki yozing — har birini yangi qatordan, yoki vergul/probel bilan ajrating." style="width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-family:monospace;resize:vertical;background:#fafafa;color:var(--text)"></textarea>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button class="btn btn-purple" onclick="processBulkChiqim()" style="font-size:12px;padding:7px 16px">✚ Ro'yxatni qo'shish</button>
+        <button class="btn btn-outline" onclick="document.getElementById('bulk-inp').value=''; document.getElementById('bulk-result').innerHTML='';" style="font-size:12px;padding:7px 16px">↺ Tozalash</button>
+      </div>
+      <div id="bulk-result" style="margin-top:10px"></div>
+    </div>
   </div>
 
   <div class="card">
@@ -1516,6 +1528,77 @@ function flashBox(box, type) {
   box.classList.remove('ok', 'err');
   box.classList.add(type);
   setTimeout(function() { box.classList.remove('ok', 'err'); }, 800);
+}
+
+function toggleBulkInput() {
+  var wrap = document.getElementById('bulk-input-wrap');
+  var btn = document.getElementById('bulk-toggle-btn');
+  var open = wrap.style.display !== 'none';
+  wrap.style.display = open ? 'none' : 'block';
+  btn.innerHTML = open ? "📋 Ro'yxat orqali qo'shish" : '✕ Ro\'yxatni yopish';
+  if (!open) document.getElementById('bulk-inp').focus();
+}
+
+function processBulkChiqim() {
+  if (!isOperator) { showAuth(); return; }
+  var sana = document.getElementById('ch-sana').value;
+  if (!sana) { toast('⚠ Avval chiqim sanasini tanlang!'); return; }
+  var raw = document.getElementById('bulk-inp').value || '';
+  var codes = raw.split(/[\s,;]+/).map(function(s) { return s.trim(); }).filter(Boolean);
+  // Bir xil barkodni bir marta hisoblash (ro'yxat ichida takrorlansa)
+  var seenInBatch = {};
+  var uniqueCodes = [];
+  codes.forEach(function(c) { if (!seenInBatch[c]) { seenInBatch[c] = true; uniqueCodes.push(c); } });
+
+  if (!uniqueCodes.length) { toast('⚠ Avval barkodlar ro\'yxatini kiriting!'); return; }
+
+  var added = [], notFound = [], alreadyUsed = [];
+  uniqueCodes.forEach(function(val) {
+    var found = kirimData.find(function(r) { return r.bc === val; });
+    if (!found) { notFound.push(val); return; }
+    var used = chiqimData.find(function(c) { return c.bc === val; });
+    if (used) { alreadyUsed.push(val); return; }
+    var rec = {
+      id:Date.now() + Math.random(), bc:found.bc, trim:found.trim,
+      product:found.product, color:found.color,
+      client:found.client, buyer:found.client,
+      qty:found.jami, sana:sana,
+      sizes:found.sizes || {},
+      holat:'Kutilmoqda', pending:true
+    };
+    chiqimData.push(rec);
+    added.push(val);
+  });
+
+  savePendingLocal();
+  renderChiqim(); updateSaveBtn();
+  var cnt = parseInt(document.getElementById('scan-count').textContent) || 0;
+  document.getElementById('scan-count').textContent = cnt + added.length;
+
+  var res = document.getElementById('bulk-result');
+  var html = '';
+  if (added.length) {
+    html += '<div class="found-box" style="margin-bottom:8px"><b style="color:#065f46">✅ ' + added.length + ' ta qo\'shildi:</b> ' + added.join(', ') + '</div>';
+  }
+  if (alreadyUsed.length) {
+    html += '<div class="not-found" style="margin-bottom:8px">⚠ ' + alreadyUsed.length + ' ta allaqachon chiqim qilingan: ' + alreadyUsed.join(', ') + '</div>';
+  }
+  if (notFound.length) {
+    html += '<div class="not-found">❌ ' + notFound.length + ' ta barkod topilmadi: ' + notFound.join(', ') + '</div>';
+  }
+  res.innerHTML = html;
+
+  // Faqat muammoli barkodlarni qoldirib, muvaffaqiyatlilarni ro'yxatdan olib tashlaymiz
+  var remaining = notFound.concat(alreadyUsed);
+  document.getElementById('bulk-inp').value = remaining.join('\n');
+
+  if (added.length && !notFound.length && !alreadyUsed.length) {
+    playBeep('ok'); toast('✅ ' + added.length + ' ta chiqim ro\'yxatga qo\'shildi');
+  } else if (added.length) {
+    playBeep('ok'); toast('✅ ' + added.length + ' ta qo\'shildi, ' + remaining.length + ' tasi muammoli');
+  } else {
+    playBeep('err'); toast('⚠ Hech biri qo\'shilmadi — barkodlarni tekshiring');
+  }
 }
 
 function updateSaveBtn() {
