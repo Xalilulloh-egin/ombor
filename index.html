@@ -884,10 +884,11 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
         <div class="card-icon-box cib-blue">📋</div>
         <div>
           <div style="font-size:13px;font-weight:700;color:var(--text);text-transform:none;letter-spacing:0">Kirim jadvali</div>
-          <div style="font-size:11px;color:var(--text-muted);font-weight:400;margin-top:1px">Barcha kirim qilingan mahsulotlar</div>
+          <div style="font-size:11px;color:var(--text-muted);font-weight:400;margin-top:1px" id="kirim-jadval-desc">Bugungi kirim qilingan mahsulotlar</div>
         </div>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-outline" id="kirim-toggle-btn" onclick="toggleShowAllKirim()" style="font-size:12px;padding:6px 14px">🕓 Eski ma'lumotlarni ko'rsatish</button>
         <button class="btn btn-red" onclick="printSelected()" style="font-size:12px;padding:6px 14px">🖨 Chop etish</button>
         <button class="btn btn-green" onclick="printKirimNakladnoy()" style="font-size:12px;padding:6px 14px">📄 Nakladnoy</button>
       </div>
@@ -956,8 +957,11 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
         <div class="card-icon-box cib-red">📤</div>
         <div>
           <div style="font-size:13px;font-weight:700;color:var(--text);text-transform:none;letter-spacing:0">Chiqim jadvali</div>
-          <div style="font-size:11px;color:var(--text-muted);font-weight:400;margin-top:1px">Chiqarib yuborilgan mahsulotlar ro'yxati</div>
+          <div style="font-size:11px;color:var(--text-muted);font-weight:400;margin-top:1px" id="chiqim-jadval-desc">Bugun chiqarib yuborilgan mahsulotlar</div>
         </div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-outline" id="chiqim-toggle-btn" onclick="toggleShowAllChiqim()" style="font-size:12px;padding:6px 14px">🕓 Eski ma'lumotlarni ko'rsatish</button>
       </div>
     </div>
     <div class="table-wrapper">
@@ -1012,7 +1016,7 @@ document.addEventListener('wheel', function(e){
 }, {passive:false});
 
 var ZAKAZ_URL = 'https://script.google.com/macros/s/AKfycbzz4R5Jzf1ZCIE-zbapjZ1Yw7G_d8H7OkhRvHRkE3fl4EAhh48Hi1hi6UJqIgFPjVG60g/exec';
-var OMBOR_URL = 'https://script.google.com/macros/s/AKfycbzF90fXiToPHSYyAHW93S1SrxHHhg8X_AEAQCna4L9zD_EpaacHlDosuLhy8TkHu-VZhQ/exec';
+var OMBOR_URL = 'https://script.google.com/macros/s/AKfycbzrnnOFcV0KNXHMjGFFNXJ_7FbXjDTKOqyabY4iktlANxTfOotSVzzl_G4zRyOsKKSI7w/exec';
 var OPERATOR_PASS = 'tmo2024';
 var ALL_SIZES_NUM  = [40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110,112,114,116,118,120,122,124,126,128,130,132,134,136,138,140,142,144,146,148,150,152,154,156,158,160,162,164,166,168,170,172,174,176,178,180,182,184,186,188,190,192,194,196,198];
 var ALL_SIZES_CHAR = ['XS','S','M','L','XL','XXL','XXXL','4XL','5XL'];
@@ -1031,6 +1035,9 @@ function clearPendingLocal() {
 }
 var selIds     = new Set();
 var kirimSelIds = new Set();
+var showAllKirim  = false;
+var showAllChiqim = false;
+function todayStr() { return new Date().toISOString().slice(0,10); }
 var isOperator = false;
 var audioCtx   = null;
 var scanTimer  = null;
@@ -1349,16 +1356,32 @@ function clearKirimForm() {
   document.getElementById('order-results').style.display = 'none';
 }
 
+function toggleShowAllKirim() {
+  showAllKirim = !showAllKirim;
+  var btn = document.getElementById('kirim-toggle-btn');
+  var desc = document.getElementById('kirim-jadval-desc');
+  if (showAllKirim) {
+    btn.innerHTML = '📅 Faqat bugungini ko\'rsatish';
+    desc.innerHTML = 'Barcha kirim qilingan mahsulotlar';
+  } else {
+    btn.innerHTML = '🕓 Eski ma\'lumotlarni ko\'rsatish';
+    desc.innerHTML = 'Bugungi kirim qilingan mahsulotlar';
+  }
+  renderKirim();
+}
+
 function renderKirim() {
   var q = (document.getElementById('k-search').value || '').toLowerCase();
+  var today = todayStr();
   var rows = kirimData.filter(function(r) {
+    if (!showAllKirim && r.sana !== today) return false;
     return !q || [r.bc,r.client,r.product,r.color,r.trim].some(function(v) {
       return String(v || '').toLowerCase().indexOf(q) !== -1;
     });
   });
   var tb = document.getElementById('kirim-tbody');
   if (!rows.length) {
-    tb.innerHTML = '<tr><td colspan="13" class="empty"><span class="empty-icon">📭</span>Hozircha kirim ma\'lumotlari yo\'q</td></tr>';
+    tb.innerHTML = '<tr><td colspan="13" class="empty"><span class="empty-icon">📭</span>' + (showAllKirim ? 'Hozircha kirim ma\'lumotlari yo\'q' : 'Bugun hech qanday kirim qilinmagan') + '</td></tr>';
     return;
   }
   var html = '';
@@ -1609,14 +1632,30 @@ function saveChiqimOne(pending, btn) {
   });
 }
 
+function toggleShowAllChiqim() {
+  showAllChiqim = !showAllChiqim;
+  var btn = document.getElementById('chiqim-toggle-btn');
+  var desc = document.getElementById('chiqim-jadval-desc');
+  if (showAllChiqim) {
+    btn.innerHTML = '📅 Faqat bugungini ko\'rsatish';
+    desc.innerHTML = 'Chiqarib yuborilgan barcha mahsulotlar ro\'yxati';
+  } else {
+    btn.innerHTML = '🕓 Eski ma\'lumotlarni ko\'rsatish';
+    desc.innerHTML = 'Bugun chiqarib yuborilgan mahsulotlar';
+  }
+  renderChiqim();
+}
+
 function renderChiqim() {
   var tb = document.getElementById('ch-tbody');
-  if (!chiqimData.length) {
-    tb.innerHTML = '<tr><td colspan="10" class="empty"><span class="empty-icon">📭</span>Hozircha chiqim ma\'lumotlari yo\'q</td></tr>';
+  var today = todayStr();
+  var rows = showAllChiqim ? chiqimData : chiqimData.filter(function(r) { return r.sana === today; });
+  if (!rows.length) {
+    tb.innerHTML = '<tr><td colspan="10" class="empty"><span class="empty-icon">📭</span>' + (showAllChiqim ? 'Hozircha chiqim ma\'lumotlari yo\'q' : 'Bugun hech qanday chiqim qilinmagan') + '</td></tr>';
     return;
   }
   var html = '';
-  chiqimData.forEach(function(r, i) {
+  rows.forEach(function(r, i) {
     var key = String(r.id || r.bc);
     var holatBadge = (r.holat === 'Yozildi' || r.holat === 'Sheets dan' || !r.pending)
       ? '<span class="status-badge status-saved">✓ Yozildi</span>'
