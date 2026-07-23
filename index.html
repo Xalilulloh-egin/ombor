@@ -1027,8 +1027,8 @@ document.addEventListener('wheel', function(e){
   }
 }, {passive:false});
 
-var ZAKAZ_URL = 'https://script.google.com/macros/s/AKfycby5rK5Gd1-NRuofpw7VgRTsv0resgq9lnYDgXnN6kcWWRM3qQIUFBTnr0G2EFqCZ9iuVw/exec';
-var OMBOR_URL = 'https://script.google.com/macros/s/AKfycbxN8VaweCysK4jLe8R32xaI7Y9adMpG8XoVOWBvrmDgv9xk8wy7jUsREw3n4nD2UleBCg/exec';
+var ZAKAZ_URL = 'https://script.google.com/macros/s/AKfycbyMG9jkyHzsFF8l3G6SXk1Qt8H1JJJ8chO_i5xcESToocBVLFprQiYdnXg0ddTBZ57fAg/exec';
+var OMBOR_URL = 'https://script.google.com/macros/s/AKfycbxicbEXe9upfWVgEnB7w6xat5qZd4WGTih04W2sqTAkPndfk2_WEmQcNxg48t2W7pja9w/exec';
 var OPERATOR_PASS = 'tmo2024';
 var ALL_SIZES_NUM  = [40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110,112,114,116,118,120,122,124,126,128,130,132,134,136,138,140,142,144,146,148,150,152,154,156,158,160,162,164,166,168,170,172,174,176,178,180,182,184,186,188,190,192,194,196,198];
 var ALL_SIZES_CHAR = ['XS','S','M','L','XL','XXL','XXXL','4XL','5XL'];
@@ -1149,7 +1149,7 @@ function jsonp(url, params, cb) {
   };
   setTimeout(function() {
     if (!done) { delete window[name]; try { document.head.removeChild(s); } catch(e) {} cb(new Error('timeout')); }
-  }, 12000);
+  }, 20000);
   document.head.appendChild(s);
 }
 
@@ -1298,11 +1298,10 @@ function addKirim() {
   var btn = document.getElementById('addKirimBtn');
   if (btn && btn.disabled) return;
   if (!dataReady) { toast('⏳ Iltimos, Sheets\'dan ma\'lumotlar yuklanishini kuting...'); return; }
-  if (btn) { btn.disabled = true; setTimeout(function(){ btn.disabled = false; }, 3000); }
   var client  = document.getElementById('k-client').value.trim();
   var product = document.getElementById('k-product').value.trim();
-  if (!client || !product) { if (btn) btn.disabled = false; toast('⚠ Klient va Mahsulot kiriting!'); return; }
-  var czEl = document.getElementById('k-cz');
+  if (!client || !product) { toast('⚠ Klient va Mahsulot kiriting!'); return; }
+  if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>Saqlanmoqda...'; }
   var czEl = document.getElementById('k-cz');
   var sizes = {}, jami = 0;
   getActiveSizes().forEach(function(s) {
@@ -1310,9 +1309,11 @@ function addKirim() {
     var v  = el ? (parseInt(el.value) || 0) : 0;
     sizes[s] = v; jami += v;
   });
-  lastBc++;
+  // Diqqat: bc (barkod raqami) endi bu yerda hisoblanmaydi. Bir nechta qurilma bir vaqtda
+  // kirim qo'shsa ham bir xil raqam chiqmasligi uchun, barkodni SERVER (Apps Script) LockService
+  // ostida beradi — shu sababli stiker faqat serverdan javob kelgandan keyin chop etiladi.
   var row = {
-    id:Date.now(), bc:String(lastBc),
+    id:Date.now(), bc:null,
     sana:document.getElementById('k-sana').value,
     client:client, product:product,
     color:document.getElementById('k-color').value.trim(),
@@ -1326,9 +1327,7 @@ function addKirim() {
     var el = document.getElementById('s' + s);
     if (el) savedSizes[s] = el.value;
   });
-  kirimData.push(row);
-  renderKirim(); clearKirimForm(); doPrint([row]);
-  toast('✅ Kirim muvaffaqiyatli qo\'shildi!');
+  clearKirimForm();
   setTimeout(function() {
     Object.keys(savedSizes).forEach(function(s) {
       var el = document.getElementById('s' + s);
@@ -1336,15 +1335,21 @@ function addKirim() {
     });
   }, 100);
   jsonp(OMBOR_URL, {
-    action:'addKirim', sana:row.sana, bc:row.bc, trim:row.trim,
+    action:'addKirim', sana:row.sana, trim:row.trim,
     client:row.client, product:row.product, color:row.color,
     sizes:JSON.stringify(row.sizes), jami:row.jami, kg:row.kg, cz:row.cz
   }, function(err, d) {
-    if (!err && d && d.status === 'ok') {
-      if (d.bc && parseInt(d.bc) > lastBc) lastBc = parseInt(d.bc);
-      toast('✅ Sheets — Kirim yozildi');
-    } else { toast('⚠ Sheets\'ga yozilmadi, internet aloqasini tekshiring'); }
-    if (btn) btn.disabled = false;
+    if (btn) { btn.disabled = false; btn.innerHTML = "✚ Qo'shish va QR yaratish"; }
+    if (!err && d && d.status === 'ok' && d.bc) {
+      row.bc = String(d.bc);
+      if (parseInt(row.bc) > lastBc) lastBc = parseInt(row.bc);
+      kirimData.push(row);
+      renderKirim();
+      doPrint([row]);
+      toast('✅ Kirim qo\'shildi (№' + row.bc + ') va Sheets\'ga yozildi');
+    } else {
+      toast('⚠ Sheets\'ga yozilmadi, internet aloqasini tekshirib qayta urining!');
+    }
   });
 }
 
@@ -1497,6 +1502,9 @@ function processScan(val) {
     res.innerHTML = '<div class="not-found">❌ Barkod topilmadi: <b>' + val + '</b></div>';
     flashBox(box, 'err'); playBeep('err'); return;
   }
+  // Mahalliy (shu brauzerdagi) tekshiruv — tezkor fidbek uchun. Asosiy himoya endi
+  // serverda (addChiqim ichida, "bu bc uchun yozuv bormi" tekshiruvi) ishlaydi, chunki
+  // boshqa qurilmada skanerlangan / hali saqlanmagan yozuvlar bu ro'yxatda ko'rinmasligi mumkin.
   var used = chiqimData.find(function(c) { return c.bc === val; });
   if (used) {
     res.innerHTML = '<div class="not-found">⚠ ' + val + ' allaqachon chiqim qilingan! ' + used.sana + ' | ' + used.qty + ' dona</div>';
@@ -1624,7 +1632,7 @@ function saveAllChiqim() {
 
   // Har birini ALOHIDA yuborish — chunk emas, chunk da 2 marta yoziladi
   var total = pending.length;
-  var sent = 0, failed = 0, done = 0;
+  var sent = 0, duplicate = 0, failed = 0, done = 0;
 
   // Har bir qatorni ketma-ket yuborish (parallel emas)
   function sendOne(i) {
@@ -1633,8 +1641,11 @@ function saveAllChiqim() {
       btn.disabled = false;
       btn.innerHTML = '💾 Barchasini saqlash';
       updateSaveBtn();
-      if (failed === 0) {
+      if (failed === 0 && duplicate === 0) {
         toast('✅ ' + sent + ' ta chiqim saqlandi!');
+        playBeep('ok');
+      } else if (failed === 0) {
+        toast('✅ ' + sent + ' ta saqlandi, ' + duplicate + ' tasi allaqachon Sheets\'da bor edi (dublikat)');
         playBeep('ok');
       } else {
         toast('⚠ ' + failed + ' ta yozilmadi — faqat xatolarni qayta saqlang');
@@ -1658,6 +1669,9 @@ function saveAllChiqim() {
     }, function(err, d) {
       if (!err && d && d.status === 'ok') {
         rec.holat = 'Yozildi'; rec.pending = false; sent++;
+      } else if (!err && d && d.status === 'duplicate') {
+        // Server allaqachon bu barkod uchun chiqim borligini aniqladi — qayta yozilmadi
+        rec.holat = 'Dublikat (allaqachon bor)'; rec.pending = false; duplicate++;
       } else {
         rec.holat = 'Xato'; failed++;
       }
@@ -1668,51 +1682,6 @@ function saveAllChiqim() {
     });
   }
   sendOne(0);
-}
-
-function syncChiqimStatus(pending) {
-  // Sheets dan qayta yuklash — yozilganmi tekshirish
-  jsonp(OMBOR_URL, {action:'getData'}, function(err, d) {
-    if (err || !d || d.status !== 'ok') return;
-    var sheetBcs = new Set((d.chiqim||[]).map(function(r){ return r.bc; }));
-    var allSaved = true;
-    pending.forEach(function(r) {
-      if (sheetBcs.has(r.bc)) {
-        r.holat = 'Yozildi'; r.pending = false;
-      } else {
-        r.holat = 'Kutilmoqda'; r.pending = true;
-        allSaved = false;
-      }
-    });
-    renderChiqim(); updateSaveBtn();
-    if (allSaved) {
-      toast('✅ Chiqimlar Sheets da tasdiqlandi!');
-      playBeep('ok');
-    } else {
-      toast('⚠ Ba\'zi chiqimlar yozilmagan — qayta saqlang');
-    }
-  });
-}
-
-function saveChiqimOne(pending, btn) {
-  var total = pending.length, done = 0, errors = 0;
-  pending.forEach(function(rec) {
-    jsonp(OMBOR_URL, {
-      action:'addChiqim', sana:rec.sana, bc:rec.bc, trim:rec.trim,
-      client:rec.client, product:rec.product, color:rec.color,
-      buyer:rec.buyer, qty:rec.qty, sizes:JSON.stringify(rec.sizes || {})
-    }, function(err, d) {
-      done++;
-      if (!err && d && d.status === 'ok') { rec.holat = 'Yozildi'; rec.pending = false; }
-      else { rec.holat = 'Xato'; errors++; }
-      renderChiqim();
-      if (done === total) {
-        updateSaveBtn();
-        toast(errors === 0 ? ('✅ ' + total + ' ta chiqim muvaffaqiyatli saqlandi!') : ('⚠ ' + errors + ' ta yozilmadi, qayta urinib ko\'ring'));
-        playBeep(errors === 0 ? 'ok' : 'err');
-      }
-    });
-  });
 }
 
 function toggleShowAllChiqim() {
@@ -1744,7 +1713,9 @@ function renderChiqim() {
       ? '<span class="status-badge status-saved">✓ Yozildi</span>'
       : r.holat === 'Xato'
         ? '<span class="status-badge status-error">✕ Xato</span>'
-        : '<span class="status-badge status-pending">⏳ Kutilmoqda</span>';
+        : r.holat === 'Dublikat (allaqachon bor)'
+          ? '<span class="status-badge status-error">⚠ Dublikat</span>'
+          : '<span class="status-badge status-pending">⏳ Kutilmoqda</span>';
     var delBtn = isOperator
       ? '<button class="tbl-btn tbl-btn-del" onclick="deleteChiqim(\'' + key + '\')">Del</button>'
       : '';
