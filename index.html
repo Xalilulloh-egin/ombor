@@ -1139,18 +1139,41 @@ function jsonp(url, params, cb) {
   var s = document.createElement('script');
   s.src = url + '?' + qs;
   var done = false;
-  window[name] = function(data) {
-    done = true; delete window[name];
+
+  function cleanup() {
+    // Callback'ni o'chirmaymiz — bo'sh funksiya qo'yamiz
+    // shunda kech kelgan javob ReferenceError bermaydi
+    window[name] = function() {};
+    setTimeout(function() { delete window[name]; }, 60000);
     try { document.head.removeChild(s); } catch(e) {}
+  }
+
+  window[name] = function(data) {
+    if (done) return;
+    done = true;
+    cleanup();
+    console.log('✅ JSONP javob keldi:', params.action, data);
     cb(null, data);
   };
+
   s.onerror = function() {
-    if (!done) { delete window[name]; try { document.head.removeChild(s); } catch(e) {} cb(new Error('err')); }
+    if (done) return;
+    done = true;
+    cleanup();
+    console.error('❌ JSONP script xatolik:', url);
+    cb(new Error('Script yuklashda xatolik'));
   };
+
   setTimeout(function() {
-    if (!done) { delete window[name]; try { document.head.removeChild(s); } catch(e) {} cb(new Error('timeout')); }
-  }, 20000);
+    if (done) return;
+    done = true;
+    cleanup();
+    console.error('⏰ JSONP timeout (60s):', params.action);
+    cb(new Error('timeout'));
+  }, 60000);  // 60 soniya — eski 20 emas!
+
   document.head.appendChild(s);
+  console.log('📡 JSONP so\'rov yuborildi:', params.action, url);
 }
 
 function showLoad(msg) {
