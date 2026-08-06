@@ -765,7 +765,7 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
       <div class="header-sub">Ombor boshqaruv tizimi</div>
     </div>
   </div>
-  <span class="badge">v2.0</span>
+  <span class="badge">v2.1</span>
   <div class="conn" id="connStatus">Ulanmoqda...</div>
   <button class="auth-btn" id="authBtn" onclick="showAuth()">🔑 Kirish</button>
 </header>
@@ -856,7 +856,7 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
           </select>
           <span>Gacha:</span>
           <select id="size-to" onchange="updateSizeGrid()">
-            <option>40</option><option>42</option><option>44</option><option>46</option><option>48</option><option  selected>50</option><option>52</option><option>54</option><option>56</option><option>58</option><option>60</option><option>62</option><option>64</option><option>66</option><option>68</option><option>70</option><option>72</option><option>74</option><option>76</option><option>78</option><option>80</option><option>82</option><option>84</option><option>86</option><option>88</option><option>90</option><option>92</option><option>94</option><option>96</option><option>98</option><option>100</option><option>102</option><option>104</option><option>106</option><option>108</option><option>110</option><option>112</option><option>114</option><option>116</option><option>118</option><option>120</option><option>122</option><option>124</option><option>126</option><option>128</option><option>130</option><option>132</option><option>134</option><option>136</option><option>138</option><option>140</option><option>142</option><option>144</option><option>146</option><option>148</option><option>150</option><option>152</option><option>154</option><option>156</option><option>158</option><option>160</option><option>162</option><option>164</option><option>166</option><option>168</option><option>170</option><option>172</option><option>174</option><option>176</option><option>178</option><option>180</option><option>182</option><option>184</option><option>186</option><option>188</option><option>190</option><option>192</option><option>194</option><option>196</option><option>198</option>
+            <option>40</option><option>42</option><option>44</option><option>46</option><option>48</option><option selected>50</option><option>52</option><option>54</option><option>56</option><option>58</option><option>60</option><option>62</option><option>64</option><option>66</option><option>68</option><option>70</option><option>72</option><option>74</option><option>76</option><option>78</option><option>80</option><option>82</option><option>84</option><option>86</option><option>88</option><option>90</option><option>92</option><option>94</option><option>96</option><option>98</option><option>100</option><option>102</option><option>104</option><option>106</option><option>108</option><option>110</option><option>112</option><option>114</option><option>116</option><option>118</option><option>120</option><option>122</option><option>124</option><option>126</option><option>128</option><option>130</option><option>132</option><option>134</option><option>136</option><option>138</option><option>140</option><option>142</option><option>144</option><option>146</option><option>148</option><option>150</option><option>152</option><option>154</option><option>156</option><option>158</option><option>160</option><option>162</option><option>164</option><option>166</option><option>168</option><option>170</option><option>172</option><option>174</option><option>176</option><option>178</option><option>180</option><option>182</option><option>184</option><option>186</option><option>188</option><option>190</option><option>192</option><option>194</option><option>196</option><option>198</option>
           </select>
         </span>
       </div>
@@ -1028,7 +1028,7 @@ document.addEventListener('wheel', function(e){
 }, {passive:false});
 
 var ZAKAZ_URL = 'https://script.google.com/macros/s/AKfycbyKqp7HrEDParwi88iG2sUfbtvP8ZkEyzOfJCMVkMwmDngjI44tuiBMDVXqWvG1OUTWug/exec';
-var OMBOR_URL = 'https://script.google.com/macros/s/AKfycbyHsosyvuwQaY5fzUEIvhV1ox4XDloeTk2HGMITtCi8OPU7Or09LXHaGdAX8PPHJ9wapg/exec';
+var OMBOR_URL = 'https://script.google.com/macros/s/AKfycbzlORCyCO5lkmkg4jjeF5H8tcgJUSIUtUuvCXbBnQiDGtuiz4KamX_EgQ1E7LKEPJ4klw/exec';
 var OPERATOR_PASS = 'tmo2024';
 var ALL_SIZES_NUM  = [40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110,112,114,116,118,120,122,124,126,128,130,132,134,136,138,140,142,144,146,148,150,152,154,156,158,160,162,164,166,168,170,172,174,176,178,180,182,184,186,188,190,192,194,196,198];
 var ALL_SIZES_CHAR = ['XXS','XS','S','M','L','XL','XXL','XXXL','4XL','5XL'];
@@ -1089,6 +1089,63 @@ function playBeep(type) {
   } catch(e) {}
 }
 
+// ══════════════════════════════════════════════════════════════
+// ██  TUZATILGAN JSONP FUNKSIYA                              ██
+// ██  - Timeout: 20s → 60s                                   ██
+// ██  - Callback timeout'da o'chirilmaydi (ReferenceError yo'q)██
+// ██  - Console log qo'shildi (F12 da debug qilish oson)     ██
+// ══════════════════════════════════════════════════════════════
+function jsonp(url, params, cb) {
+  var name = 'cb_' + Date.now() + '_' + Math.floor(Math.random()*9999);
+  params.callback = name;
+  var qs = Object.keys(params).map(function(k) {
+    return k + '=' + encodeURIComponent(params[k]);
+  }).join('&');
+  var s = document.createElement('script');
+  s.src = url + '?' + qs;
+  var done = false;
+  var timeoutId;
+
+  function cleanup() {
+    clearTimeout(timeoutId);
+    // Callback'ni darhol o'chirmaymiz — bo'sh funksiya qo'yamiz
+    // shunda kech kelgan javob ReferenceError bermaydi
+    window[name] = function() {
+      console.log('⚠️ JSONP kech javob keldi (timeout bo\'lgandan keyin):', params.action);
+    };
+    // 2 daqiqadan keyin butunlay tozalaymiz
+    setTimeout(function() { try { delete window[name]; } catch(e) {} }, 120000);
+    try { document.head.removeChild(s); } catch(e) {}
+  }
+
+  window[name] = function(data) {
+    if (done) return;
+    done = true;
+    cleanup();
+    console.log('✅ JSONP javob keldi:', params.action, data && data.status);
+    cb(null, data);
+  };
+
+  s.onerror = function() {
+    if (done) return;
+    done = true;
+    cleanup();
+    console.error('❌ JSONP script yuklashda xatolik:', params.action, url);
+    cb(new Error('Script yuklashda xatolik'));
+  };
+
+  timeoutId = setTimeout(function() {
+    if (done) return;
+    done = true;
+    cleanup();
+    console.error('⏰ JSONP timeout (60s):', params.action, url);
+    cb(new Error('timeout'));
+  }, 60000);
+
+  document.head.appendChild(s);
+  console.log('📡 JSONP so\'rov yuborildi:', params.action);
+}
+
 function showAuth() {
   if (isOperator) { logoutOp(); return; }
   document.getElementById('authModal').classList.add('open');
@@ -1130,52 +1187,6 @@ document.getElementById('passInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') checkPass();
 });
 
-function jsonp(url, params, cb) {
-  var name = 'cb_' + Date.now() + '_' + Math.floor(Math.random()*9999);
-  params.callback = name;
-  var qs = Object.keys(params).map(function(k) {
-    return k + '=' + encodeURIComponent(params[k]);
-  }).join('&');
-  var s = document.createElement('script');
-  s.src = url + '?' + qs;
-  var done = false;
-
-  function cleanup() {
-    // Callback'ni o'chirmaymiz — bo'sh funksiya qo'yamiz
-    // shunda kech kelgan javob ReferenceError bermaydi
-    window[name] = function() {};
-    setTimeout(function() { delete window[name]; }, 60000);
-    try { document.head.removeChild(s); } catch(e) {}
-  }
-
-  window[name] = function(data) {
-    if (done) return;
-    done = true;
-    cleanup();
-    console.log('✅ JSONP javob keldi:', params.action, data);
-    cb(null, data);
-  };
-
-  s.onerror = function() {
-    if (done) return;
-    done = true;
-    cleanup();
-    console.error('❌ JSONP script xatolik:', url);
-    cb(new Error('Script yuklashda xatolik'));
-  };
-
-  setTimeout(function() {
-    if (done) return;
-    done = true;
-    cleanup();
-    console.error('⏰ JSONP timeout (60s):', params.action);
-    cb(new Error('timeout'));
-  }, 60000);  // 60 soniya — eski 20 emas!
-
-  document.head.appendChild(s);
-  console.log('📡 JSONP so\'rov yuborildi:', params.action, url);
-}
-
 function showLoad(msg) {
   var d = document.createElement('div');
   d.className = 'load-overlay'; d.id = 'loadOv';
@@ -1208,7 +1219,8 @@ function loadFromSheets() {
     if (err || !d || d.status !== 'ok') {
       s.textContent = '✕ Ulanmadi';
       s.className = 'conn err';
-      toast('⚠ Sheets\'dan ma\'lumot yuklanmadi');
+      console.error('❌ Sheets ulanish xatoligi:', err, d);
+      toast('⚠ Sheets\'dan ma\'lumot yuklanmadi. F12 konsolni tekshiring.');
       return;
     }
     s.textContent = '✓ Sheets ulandi';
@@ -1222,6 +1234,7 @@ function loadFromSheets() {
       if (mx >= lastBc) lastBc = mx;
     }
     dataReady = true;
+    console.log('✅ Ma\'lumotlar yuklandi: kirim=' + kirimData.length + ', chiqim=' + chiqimData.length);
     renderKirim(); renderChiqim(); updateSaveBtn();
   });
 }
@@ -1332,9 +1345,6 @@ function addKirim() {
     var v  = el ? (parseInt(el.value) || 0) : 0;
     sizes[s] = v; jami += v;
   });
-  // Diqqat: bc (barkod raqami) endi bu yerda hisoblanmaydi. Bir nechta qurilma bir vaqtda
-  // kirim qo'shsa ham bir xil raqam chiqmasligi uchun, barkodni SERVER (Apps Script) LockService
-  // ostida beradi — shu sababli stiker faqat serverdan javob kelgandan keyin chop etiladi.
   var row = {
     id:Date.now(), bc:null,
     sana:document.getElementById('k-sana').value,
@@ -1382,7 +1392,6 @@ function clearKirimForm() {
   var savedClient  = document.getElementById('k-client').value;
   var savedProduct = document.getElementById('k-product').value;
   var savedColor   = document.getElementById('k-color').value;
-  // k-kg saqlanib qoladi
   ['k-trim','k-client','k-product','k-color'].forEach(function(id) {
     var el = document.getElementById(id);
     el.setAttribute('readonly','readonly');
@@ -1525,9 +1534,6 @@ function processScan(val) {
     res.innerHTML = '<div class="not-found">❌ Barkod topilmadi: <b>' + val + '</b></div>';
     flashBox(box, 'err'); playBeep('err'); return;
   }
-  // Mahalliy (shu brauzerdagi) tekshiruv — tezkor fidbek uchun. Asosiy himoya endi
-  // serverda (addChiqim ichida, "bu bc uchun yozuv bormi" tekshiruvi) ishlaydi, chunki
-  // boshqa qurilmada skanerlangan / hali saqlanmagan yozuvlar bu ro'yxatda ko'rinmasligi mumkin.
   var used = chiqimData.find(function(c) { return c.bc === val; });
   if (used) {
     res.innerHTML = '<div class="not-found">⚠ ' + val + ' allaqachon chiqim qilingan! ' + used.sana + ' | ' + used.qty + ' dona</div>';
@@ -1576,7 +1582,6 @@ function processBulkChiqim() {
   if (!sana) { toast('⚠ Avval chiqim sanasini tanlang!'); return; }
   var raw = document.getElementById('bulk-inp').value || '';
   var codes = raw.split(/[\s,;]+/).map(function(s) { return s.trim(); }).filter(Boolean);
-  // Bir xil barkodni bir marta hisoblash (ro'yxat ichida takrorlansa)
   var seenInBatch = {};
   var uniqueCodes = [];
   codes.forEach(function(c) { if (!seenInBatch[c]) { seenInBatch[c] = true; uniqueCodes.push(c); } });
@@ -1619,7 +1624,6 @@ function processBulkChiqim() {
   }
   res.innerHTML = html;
 
-  // Faqat muammoli barkodlarni qoldirib, muvaffaqiyatlilarni ro'yxatdan olib tashlaymiz
   var remaining = notFound.concat(alreadyUsed);
   document.getElementById('bulk-inp').value = remaining.join('\n');
 
@@ -1653,14 +1657,11 @@ function saveAllChiqim() {
   btn.innerHTML = '<span class="spinner"></span>Yuborilmoqda...';
   btn.disabled = true;
 
-  // Har birini ALOHIDA yuborish — chunk emas, chunk da 2 marta yoziladi
   var total = pending.length;
   var sent = 0, duplicate = 0, failed = 0, done = 0;
 
-  // Har bir qatorni ketma-ket yuborish (parallel emas)
   function sendOne(i) {
     if (i >= total) {
-      // Hammasi tugadi
       btn.disabled = false;
       btn.innerHTML = '💾 Barchasini saqlash';
       updateSaveBtn();
@@ -1678,9 +1679,7 @@ function saveAllChiqim() {
       return;
     }
     var rec = pending[i];
-    // Allaqachon yuborilgan bo'lsa o'tkazib yuborish
     if (!rec.pending) { sendOne(i + 1); return; }
-    // Yuborilmoqda belgisi
     rec.holat = 'Yuborilmoqda...';
     renderChiqim();
     jsonp(OMBOR_URL, {
@@ -1693,13 +1692,11 @@ function saveAllChiqim() {
       if (!err && d && d.status === 'ok') {
         rec.holat = 'Yozildi'; rec.pending = false; sent++;
       } else if (!err && d && d.status === 'duplicate') {
-        // Server allaqachon bu barkod uchun chiqim borligini aniqladi — qayta yozilmadi
         rec.holat = 'Dublikat (allaqachon bor)'; rec.pending = false; duplicate++;
       } else {
         rec.holat = 'Xato'; failed++;
       }
       done++;
-      // Progress ko'rsatish
       btn.innerHTML = '<span class="spinner"></span>' + done + '/' + total;
       setTimeout(function(){ sendOne(i + 1); }, 300);
     });
