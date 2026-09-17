@@ -1046,8 +1046,8 @@ document.addEventListener('wheel', function(e){
 }, {passive:false});
 
 // ⬇⬇⬇  YANGI URL'LAR  ⬇⬇⬇
-var ZAKAZ_URL = 'https://script.google.com/macros/s/AKfycby6qmbc75rKrmMcgI4d_OkBmu-I1EjIKX0cVVVQjxCfTrackMmK-Izkedll3-kf-tEW-w/exec';
-var OMBOR_URL = 'https://script.google.com/macros/s/AKfycbw95JKy9mx0s3vHZFXztwnyIbVFpPRfhPXO7xMtysW4Lt7xWJxubOcFnexguih9kHNJUg/exec';
+var ZAKAZ_URL = 'https://script.google.com/macros/s/AKfycbyffVPgtrxYUbRuroblafhsmRB-AUkTi9pKIB9dKB7QanBA9jniIvCOzoFeuxighaqztQ/exec';
+var OMBOR_URL = 'https://script.google.com/macros/s/AKfycbxyA1D_Y2Jlqh67pYPBFeb4Q7tOxi1Gi33iCLV2Vabob-gkFbXZ38vBjhkgJlgEOBKecg/exec';
 var OPERATOR_PASS = 'tmo2024';
 var ALL_SIZES_NUM  = [40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110,112,114,116,118,120,122,124,126,128,130,132,134,136,138,140,142,144,146,148,150,152,154,156,158,160,162,164,166,168,170,172,174,176,178,180,182,184,186,188,190,192,194,196,198];
 var ALL_SIZES_CHAR = ['XXS','XS','S','M','L','XL','XXL','XXXL','4XL','5XL'];
@@ -1230,9 +1230,23 @@ function showTab(name, el) {
   }
 }
 
+// ══════════════════════════════════════════════════════════════
+// ██  TUZATILGAN loadFromSheets                                ██
+// ██  Eski: sayt ochilganda BUTUN tarixni (minglab qator)      ██
+// ██        bir vaqtda yuklardi — jadval kattalashgani sari    ██
+// ██        sayt tobora sekin ochiladigan bo'lib qolardi       ██
+// ██  Yangi: faqat so'nggi RECENT_DAYS kunlik ma'lumot         ██
+// ██        yuklanadi. To'liq tarix faqat "Eski ma'lumotlarni  ██
+// ██        ko'rsatish" bosilganda, bir martagina, orqa fonda  ██
+// ██        yuklanadi (ensureFullHistoryLoaded funksiyasi).    ██
+// ══════════════════════════════════════════════════════════════
+var RECENT_DAYS = 45;
+var fullHistoryLoaded = false;
+var fullHistoryLoading = false;
+
 function loadFromSheets() {
   showLoad('Ma\'lumotlar yuklanmoqda...');
-  jsonp(OMBOR_URL, {action:'getData'}, function(err, d) {
+  jsonp(OMBOR_URL, {action:'getData', days:RECENT_DAYS}, function(err, d) {
     hideLoad();
     var s = document.getElementById('connStatus');
     if (err || !d || d.status !== 'ok') {
@@ -1253,8 +1267,38 @@ function loadFromSheets() {
       if (mx >= lastBc) lastBc = mx;
     }
     dataReady = true;
-    console.log('✅ Ma\'lumotlar yuklandi: kirim=' + kirimData.length + ', chiqim=' + chiqimData.length);
+    console.log('✅ So\'nggi ' + RECENT_DAYS + ' kunlik ma\'lumot yuklandi: kirim=' + kirimData.length + ', chiqim=' + chiqimData.length);
     renderKirim(); renderChiqim(); updateSaveBtn();
+  });
+}
+
+// "Eski ma'lumotlarni ko'rsatish" birinchi marta bosilganda to'liq tarixni
+// (barcha sanalar) orqa fonda bir martagina yuklab oladi. Keyingi bosishlarda
+// qayta so'rov yubormaydi — xotiradagi ma'lumotdan foydalanadi.
+function ensureFullHistoryLoaded(cb) {
+  if (fullHistoryLoaded) { cb(); return; }
+  if (fullHistoryLoading) { return; } // allaqachon yuklanmoqda, qayta bosishni e'tiborsiz qoldiramiz
+  fullHistoryLoading = true;
+  showLoad('To\'liq tarix yuklanmoqda... (birinchi marta biroz vaqt olishi mumkin)');
+  jsonp(OMBOR_URL, {action:'getData'}, function(err, d) { // 'days' YO'Q => TO'LIQ tarix
+    hideLoad();
+    fullHistoryLoading = false;
+    if (err || !d || d.status !== 'ok') {
+      toast('⚠ To\'liq tarixni yuklab bo\'lmadi, faqat so\'nggi ma\'lumotlar ko\'rsatiladi');
+      cb();
+      return;
+    }
+    // Chiqim'da hali Sheets'ga yozilmagan (pending) yozuvlar bo'lishi mumkin —
+    // ularni to'liq ro'yxatga qo'shib qo'yamiz, aks holda ekrandan yo'qolib qoladi
+    var pendingChiqim = chiqimData.filter(function(r) { return r.pending; });
+    kirimData  = d.kirim  || [];
+    chiqimData = d.chiqim || [];
+    pendingChiqim.forEach(function(p) {
+      if (!chiqimData.some(function(r) { return r.bc === p.bc; })) chiqimData.push(p);
+    });
+    fullHistoryLoaded = true;
+    console.log('✅ To\'liq tarix yuklandi: kirim=' + kirimData.length + ', chiqim=' + chiqimData.length);
+    cb();
   });
 }
 
@@ -1460,16 +1504,24 @@ function clearKirimForm() {
 }
 
 function toggleShowAllKirim() {
-  showAllKirim = !showAllKirim;
   var btn = document.getElementById('kirim-toggle-btn');
   var desc = document.getElementById('kirim-jadval-desc');
-  if (showAllKirim) {
-    btn.innerHTML = '📅 Faqat bugungini ko\'rsatish';
-    desc.innerHTML = 'Barcha kirim qilingan mahsulotlar';
-  } else {
-    btn.innerHTML = '🕓 Eski ma\'lumotlarni ko\'rsatish';
-    desc.innerHTML = 'Bugungi kirim qilingan mahsulotlar';
+
+  if (!showAllKirim) {
+    // "Eski ma'lumotlarni ko'rsatish" bosildi — kerak bo'lsa avval to'liq
+    // tarixni yuklab olamiz (faqat birinchi marta, keyin xotiradan ishlatiladi)
+    ensureFullHistoryLoaded(function() {
+      showAllKirim = true;
+      btn.innerHTML = '📅 Faqat bugungini ko\'rsatish';
+      desc.innerHTML = 'Barcha kirim qilingan mahsulotlar';
+      renderKirim();
+    });
+    return;
   }
+
+  showAllKirim = false;
+  btn.innerHTML = '🕓 Eski ma\'lumotlarni ko\'rsatish';
+  desc.innerHTML = 'Bugungi kirim qilingan mahsulotlar';
   renderKirim();
 }
 
@@ -1759,16 +1811,22 @@ function saveAllChiqim() {
 }
 
 function toggleShowAllChiqim() {
-  showAllChiqim = !showAllChiqim;
   var btn = document.getElementById('chiqim-toggle-btn');
   var desc = document.getElementById('chiqim-jadval-desc');
-  if (showAllChiqim) {
-    btn.innerHTML = '📅 Faqat bugungini ko\'rsatish';
-    desc.innerHTML = 'Chiqarib yuborilgan barcha mahsulotlar ro\'yxati';
-  } else {
-    btn.innerHTML = '🕓 Eski ma\'lumotlarni ko\'rsatish';
-    desc.innerHTML = 'Bugun chiqarib yuborilgan mahsulotlar';
+
+  if (!showAllChiqim) {
+    ensureFullHistoryLoaded(function() {
+      showAllChiqim = true;
+      btn.innerHTML = '📅 Faqat bugungini ko\'rsatish';
+      desc.innerHTML = 'Chiqarib yuborilgan barcha mahsulotlar ro\'yxati';
+      renderChiqim();
+    });
+    return;
   }
+
+  showAllChiqim = false;
+  btn.innerHTML = '🕓 Eski ma\'lumotlarni ko\'rsatish';
+  desc.innerHTML = 'Bugun chiqarib yuborilgan mahsulotlar';
   renderChiqim();
 }
 
