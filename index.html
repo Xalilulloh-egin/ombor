@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TMO Trikotaj — Ombor tizimi</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 *{box-sizing:border-box;margin:0;padding:0}
 
 :root {
@@ -36,40 +37,28 @@ body{font-family:'Inter',Arial,sans-serif;background:var(--bg);color:var(--text)
 /* ── HEADER ── */
 header{
   background:linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #2d1f6e 100%);
-  color:#fff;
-  padding:0 24px;
-  height:64px;
-  display:flex;
-  align-items:center;
-  gap:12px;
+  color:#fff;padding:0 24px;height:64px;
+  display:flex;align-items:center;gap:12px;
   box-shadow:0 2px 12px rgba(0,0,0,0.25);
   position:sticky;top:0;z-index:100;
 }
-.header-logo{
-  display:flex;align-items:center;gap:10px;
-}
+.header-logo{display:flex;align-items:center;gap:10px;}
 .logo-icon{
   width:38px;height:38px;
   background:linear-gradient(135deg,#6366f1,#8b5cf6);
-  border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
   font-size:17px;font-weight:800;color:#fff;
-  box-shadow:0 2px 10px rgba(99,102,241,0.5);
-  letter-spacing:-0.5px;
+  box-shadow:0 2px 10px rgba(99,102,241,0.5);letter-spacing:-0.5px;
 }
 header h1{font-size:15px;font-weight:700;letter-spacing:-0.3px}
 .badge{
-  font-size:10.5px;
-  background:linear-gradient(135deg,#6366f1,#8b5cf6);
-  padding:3px 10px;border-radius:20px;
-  font-weight:600;letter-spacing:0.3px;
+  font-size:10.5px;background:linear-gradient(135deg,#6366f1,#8b5cf6);
+  padding:3px 10px;border-radius:20px;font-weight:600;letter-spacing:0.3px;
 }
 .conn{
   font-size:11px;padding:4px 12px;border-radius:20px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.1);
-  font-weight:500;
-  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);
+  font-weight:500;display:flex;align-items:center;gap:5px;
 }
 .conn::before{content:'';width:6px;height:6px;border-radius:50%;background:#94a3b8;display:inline-block;}
 .conn.ok{background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.3);color:#6ee7b7;}
@@ -77,48 +66,29 @@ header h1{font-size:15px;font-weight:700;letter-spacing:-0.3px}
 .conn.err{background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.3);color:#fca5a5;}
 .conn.err::before{background:#ef4444;}
 .auth-btn{
-  margin-left:auto;
-  font-size:12px;padding:6px 16px;
-  border-radius:8px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.15);
-  cursor:pointer;color:#fff;font-weight:600;
-  transition:all 0.2s;font-family:inherit;
+  margin-left:auto;font-size:12px;padding:6px 16px;border-radius:8px;
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  cursor:pointer;color:#fff;font-weight:600;transition:all 0.2s;font-family:inherit;
 }
 .auth-btn:hover{background:rgba(255,255,255,0.15);}
 .auth-btn.on{
   background:linear-gradient(135deg,#10b981,#059669);
-  border-color:transparent;
-  box-shadow:0 2px 8px rgba(16,185,129,0.3);
+  border-color:transparent;box-shadow:0 2px 8px rgba(16,185,129,0.3);
 }
 
 /* ── TABS ── */
 .tabs{
-  display:flex;
-  background:#fff;
-  border-bottom:1px solid var(--border);
-  padding:0 24px;
-  gap:4px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.04);
+  display:flex;background:#fff;border-bottom:1px solid var(--border);
+  padding:0 24px;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.04);
   position:sticky;top:64px;z-index:99;
 }
 .tab{
-  padding:14px 20px;
-  cursor:pointer;
-  font-size:13px;
-  font-weight:600;
-  color:var(--text-muted);
-  border-bottom:2px solid transparent;
-  margin-bottom:-1px;
-  transition:all 0.2s;
-  display:flex;align-items:center;gap:7px;
-  white-space:nowrap;
+  padding:14px 20px;cursor:pointer;font-size:13px;font-weight:600;
+  color:var(--text-muted);border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:all 0.2s;display:flex;align-items:center;gap:7px;white-space:nowrap;
 }
 .tab:hover{color:var(--text);}
-.tab.active{
-  color:var(--accent);
-  border-color:var(--accent);
-}
+.tab.active{color:var(--accent);border-color:var(--accent);}
 .tab-icon{font-size:15px;}
 
 /* ── PAGES ── */
@@ -128,187 +98,97 @@ header h1{font-size:15px;font-weight:700;letter-spacing:-0.3px}
 
 /* ── CARDS ── */
 .card{
-  background:var(--card-bg);
-  border-radius:var(--radius);
-  padding:20px 22px;
-  margin-bottom:16px;
-  box-shadow:var(--shadow-md);
-  border:1px solid var(--border);
+  background:var(--card-bg);border-radius:var(--radius);padding:20px 22px;
+  margin-bottom:16px;box-shadow:var(--shadow-md);border:1px solid var(--border);
   transition:box-shadow 0.2s;
 }
 .card:hover{box-shadow:var(--shadow-lg);}
 .card-title{
-  font-size:11px;color:var(--text-muted);
-  font-weight:700;text-transform:uppercase;
+  font-size:11px;color:var(--text-muted);font-weight:700;text-transform:uppercase;
   letter-spacing:0.8px;margin-bottom:16px;
   display:flex;align-items:center;justify-content:space-between;
-}
-.card-title-icon{
-  font-size:16px;margin-right:6px;
 }
 
 /* ── FORMS ── */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .form-group{display:flex;flex-direction:column;gap:5px}
-.form-group label{
-  font-size:11px;color:var(--text-muted);
-  font-weight:600;letter-spacing:0.3px;
+.form-group label{font-size:11px;color:var(--text-muted);font-weight:600;letter-spacing:0.3px;}
+.form-group input,.form-group select{
+  padding:9px 13px;border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  font-size:13px;background:#fafafa;color:var(--text);font-family:inherit;transition:all 0.2s;
 }
-.form-group input,
-.form-group select{
-  padding:9px 13px;
-  border:1.5px solid var(--border);
-  border-radius:var(--radius-sm);
-  font-size:13px;
-  background:#fafafa;
-  color:var(--text);
-  font-family:inherit;
-  transition:all 0.2s;
-}
-.form-group input:focus,
-.form-group select:focus{
-  outline:none;
-  border-color:var(--accent);
-  background:#fff;
+.form-group input:focus,.form-group select:focus{
+  outline:none;border-color:var(--accent);background:#fff;
   box-shadow:0 0 0 3px rgba(99,102,241,0.1);
 }
-.form-group input[readonly]{
-  background:#f0f4ff;
-  color:var(--accent);
-  font-weight:600;
-  border-color:#c7d2fe;
-}
+.form-group input[readonly]{background:#f0f4ff;color:var(--accent);font-weight:600;border-color:#c7d2fe;}
 
 /* ── TRIM SEARCH ── */
 .trim-search{
-  display:flex;gap:10px;align-items:flex-end;
-  margin-bottom:16px;padding-bottom:16px;
+  display:flex;gap:10px;align-items:flex-end;margin-bottom:16px;padding-bottom:16px;
   border-bottom:1px solid var(--border);
 }
 .trim-search input{
-  flex:1;padding:11px 15px;
-  border:2px solid var(--primary-light);
-  border-radius:var(--radius-sm);
-  font-size:14px;font-weight:700;
-  letter-spacing:2px;font-family:monospace;
-  transition:all 0.2s;
+  flex:1;padding:11px 15px;border:2px solid var(--primary-light);border-radius:var(--radius-sm);
+  font-size:14px;font-weight:700;letter-spacing:2px;font-family:monospace;transition:all 0.2s;
 }
-.trim-search input:focus{
-  outline:none;
-  border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(99,102,241,0.1);
-}
+.trim-search input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,102,241,0.1);}
 .trim-search button{
-  padding:11px 22px;
-  background:linear-gradient(135deg,var(--primary),var(--primary-light));
-  color:#fff;border:none;
-  border-radius:var(--radius-sm);
-  font-size:13px;font-weight:700;
-  cursor:pointer;font-family:inherit;
-  transition:all 0.2s;white-space:nowrap;
-  box-shadow:var(--shadow-sm);
+  padding:11px 22px;background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  color:#fff;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:all 0.2s;white-space:nowrap;box-shadow:var(--shadow-sm);
 }
 .trim-search button:hover{
   background:linear-gradient(135deg,var(--accent),var(--accent-hover));
-  box-shadow:0 4px 12px rgba(99,102,241,0.3);
-  transform:translateY(-1px);
+  box-shadow:0 4px 12px rgba(99,102,241,0.3);transform:translateY(-1px);
 }
 
 /* ── ORDER RESULTS ── */
 .found-orders{
-  background:linear-gradient(135deg,#f0fdf4,#dcfce7);
-  border:1px solid #a7f3d0;
-  border-radius:var(--radius-sm);
-  padding:14px;margin-bottom:14px;
+  background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #a7f3d0;
+  border-radius:var(--radius-sm);padding:14px;margin-bottom:14px;
 }
-.found-orders h4{
-  color:#065f46;font-size:12px;
-  font-weight:700;margin-bottom:10px;
-  display:flex;align-items:center;gap:6px;
-}
+.found-orders h4{color:#065f46;font-size:12px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
 .order-item{
-  display:flex;align-items:center;gap:12px;
-  padding:10px 12px;
-  background:#fff;border-radius:8px;
-  margin-bottom:6px;cursor:pointer;
-  border:2px solid transparent;
-  font-size:12px;transition:all 0.2s;
+  display:flex;align-items:center;gap:12px;padding:10px 12px;background:#fff;border-radius:8px;
+  margin-bottom:6px;cursor:pointer;border:2px solid transparent;font-size:12px;transition:all 0.2s;
   box-shadow:var(--shadow-sm);
 }
 .order-item:hover{border-color:var(--primary-light);transform:translateY(-1px);}
-.order-item.selected{
-  border-color:var(--accent);
-  background:#f5f3ff;
-  box-shadow:0 0 0 2px rgba(99,102,241,0.15);
-}
+.order-item.selected{border-color:var(--accent);background:#f5f3ff;box-shadow:0 0 0 2px rgba(99,102,241,0.15);}
 .oi-trim{font-weight:800;font-family:monospace;font-size:13px;min-width:80px;color:var(--primary);}
 .oi-prod{flex:1;line-height:1.5}
 .oi-qty{font-weight:700;color:var(--accent);min-width:70px;text-align:right;}
 .not-found-box{
-  background:#fef2f2;border:1px solid #fecaca;
-  border-radius:var(--radius-sm);padding:12px;
-  color:#dc2626;font-size:13px;margin-bottom:12px;
-  display:flex;align-items:center;gap:8px;
+  background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius-sm);padding:12px;
+  color:#dc2626;font-size:13px;margin-bottom:12px;display:flex;align-items:center;gap:8px;
 }
 
 /* ── SIZE GRID ── */
-.sizes-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));
-  gap:8px;margin-top:8px;
-}
+.sizes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px;margin-top:8px;}
 .size-item{display:flex;flex-direction:column;gap:4px}
-.size-item label{
-  font-size:10.5px;color:var(--text-muted);
-  text-align:center;font-weight:600;
-}
+.size-item label{font-size:10.5px;color:var(--text-muted);text-align:center;font-weight:600;}
 .size-item input{
-  padding:7px 4px;text-align:center;
-  border:1.5px solid var(--border);
-  border-radius:6px;font-size:13px;
-  font-weight:600;transition:all 0.2s;
-  font-family:inherit;
+  padding:7px 4px;text-align:center;border:1.5px solid var(--border);border-radius:6px;
+  font-size:13px;font-weight:600;transition:all 0.2s;font-family:inherit;
 }
-.size-item input:focus{
-  border-color:var(--accent);
-  box-shadow:0 0 0 2px rgba(99,102,241,0.1);
-  outline:none;
-}
+.size-item input:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(99,102,241,0.1);outline:none;}
 
 /* ── BUTTONS ── */
 .btn{
-  padding:9px 18px;border:none;
-  border-radius:var(--radius-sm);
-  font-size:13px;font-weight:600;
-  cursor:pointer;font-family:inherit;
-  transition:all 0.2s;display:inline-flex;
-  align-items:center;gap:6px;
+  padding:9px 18px;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;
+  cursor:pointer;font-family:inherit;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px;
 }
 .btn:hover{transform:translateY(-1px);}
-.btn-primary{
-  background:linear-gradient(135deg,var(--primary),var(--primary-light));
-  color:#fff;
-  box-shadow:var(--shadow-sm);
-}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;box-shadow:var(--shadow-sm);}
 .btn-primary:hover{box-shadow:0 4px 12px rgba(15,23,42,0.3);}
-.btn-red{
-  background:linear-gradient(135deg,#ef4444,#dc2626);
-  color:#fff;box-shadow:var(--shadow-sm);
-}
+.btn-red{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;box-shadow:var(--shadow-sm);}
 .btn-red:hover{box-shadow:0 4px 12px rgba(239,68,68,0.3);}
-.btn-green{
-  background:linear-gradient(135deg,#10b981,#059669);
-  color:#fff;box-shadow:var(--shadow-sm);
-}
+.btn-green{background:linear-gradient(135deg,#10b981,#059669);color:#fff;box-shadow:var(--shadow-sm);}
 .btn-green:hover{box-shadow:0 4px 12px rgba(16,185,129,0.3);}
-.btn-purple{
-  background:linear-gradient(135deg,var(--accent),var(--accent-hover));
-  color:#fff;box-shadow:var(--shadow-sm);
-}
+.btn-purple{background:linear-gradient(135deg,var(--accent),var(--accent-hover));color:#fff;box-shadow:var(--shadow-sm);}
 .btn-purple:hover{box-shadow:0 4px 12px rgba(99,102,241,0.35);}
-.btn-outline{
-  background:#fff;color:var(--primary);
-  border:1.5px solid var(--border);
-}
+.btn-outline{background:#fff;color:var(--primary);border:1.5px solid var(--border);}
 .btn-outline:hover{border-color:var(--primary);background:#f8fafc;}
 .btn-row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center}
 
@@ -316,101 +196,62 @@ header h1{font-size:15px;font-weight:700;letter-spacing:-0.3px}
 .table-wrapper{overflow:auto;border-radius:var(--radius-sm);border:1px solid var(--border)}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 th{
-  background:#f8fafc;
-  padding:9px 11px;text-align:left;
-  font-size:10.5px;color:var(--text-muted);
-  text-transform:uppercase;letter-spacing:0.5px;
-  border-bottom:1px solid var(--border);
+  background:#f8fafc;padding:9px 11px;text-align:left;font-size:10.5px;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid var(--border);
   font-weight:700;white-space:nowrap;
 }
-td{
-  padding:9px 11px;
-  border-bottom:1px solid #f1f5f9;
-  vertical-align:middle;
-}
+td{padding:9px 11px;border-bottom:1px solid #f1f5f9;vertical-align:middle;}
 tr:last-child td{border-bottom:none;}
 tr:hover td{background:#f8fafc;}
+tr:nth-child(even) td{background:#fafbfc;}
+tr:nth-child(even):hover td{background:#f4f6fa;}
 .bc-badge{
-  background:linear-gradient(135deg,var(--primary),var(--primary-light));
-  color:#fff;padding:3px 9px;
-  border-radius:6px;font-size:11px;
-  font-family:monospace;letter-spacing:1px;
-  font-weight:700;
+  background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;
+  padding:3px 9px;border-radius:6px;font-size:11px;font-family:monospace;letter-spacing:1px;font-weight:700;
 }
-.empty{
-  text-align:center;padding:36px;
-  color:var(--text-light);font-size:13px;
-}
+.empty{text-align:center;padding:36px;color:var(--text-light);font-size:13px;}
 .empty-icon{font-size:32px;margin-bottom:8px;display:block;}
+.more-rows{text-align:center;padding:10px;color:var(--text-muted);font-size:12px;background:#f8fafc;}
 
 /* ── SCANNER ── */
 .scanner-box{
-  border:2px dashed #cbd5e1;
-  border-radius:var(--radius);
-  padding:20px;text-align:center;
-  cursor:text;margin-bottom:14px;
-  transition:all 0.3s;
-  background:#fafafa;
+  border:2px dashed #cbd5e1;border-radius:var(--radius);padding:20px;text-align:center;
+  cursor:text;margin-bottom:14px;transition:all 0.3s;background:#fafafa;
 }
 .scanner-box:hover{border-color:var(--accent);background:#f5f3ff;}
-.scanner-box.ok{
-  border-color:var(--success);
-  background:linear-gradient(135deg,#f0fdf4,#dcfce7);
-  animation:pulse-green 0.4s ease;
-}
-.scanner-box.err{
-  border-color:var(--danger);
-  background:linear-gradient(135deg,#fef2f2,#fee2e2);
-  animation:pulse-red 0.4s ease;
-}
+.scanner-box.ok{border-color:var(--success);background:linear-gradient(135deg,#f0fdf4,#dcfce7);animation:pulse-green 0.4s ease;}
+.scanner-box.err{border-color:var(--danger);background:linear-gradient(135deg,#fef2f2,#fee2e2);animation:pulse-red 0.4s ease;}
 @keyframes pulse-green{0%,100%{box-shadow:none}50%{box-shadow:0 0 0 6px rgba(16,185,129,0.15)}}
 @keyframes pulse-red{0%,100%{box-shadow:none}50%{box-shadow:0 0 0 6px rgba(239,68,68,0.15)}}
 .scanner-icon{font-size:40px;margin-bottom:6px;display:block;}
 .scanner-text{color:var(--text-muted);font-size:12.5px;margin-bottom:12px;}
 .scanner-input{
-  width:100%;padding:13px;font-size:20px;
-  border:2px solid var(--primary-light);
-  border-radius:var(--radius-sm);text-align:center;
-  letter-spacing:4px;font-family:monospace;
-  margin-top:4px;font-weight:700;
-  transition:all 0.2s;
+  width:100%;padding:13px;font-size:20px;border:2px solid var(--primary-light);border-radius:var(--radius-sm);
+  text-align:center;letter-spacing:4px;font-family:monospace;margin-top:4px;font-weight:700;transition:all 0.2s;
 }
-.scanner-input:focus{
-  outline:none;
-  border-color:var(--accent);
-  background:#f5f3ff;
-  box-shadow:0 0 0 3px rgba(99,102,241,0.1);
-}
+.scanner-input:focus{outline:none;border-color:var(--accent);background:#f5f3ff;box-shadow:0 0 0 3px rgba(99,102,241,0.1);}
 .found-box{
-  background:linear-gradient(135deg,#f0fdf4,#dcfce7);
-  border:1px solid #a7f3d0;
+  background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #a7f3d0;
   border-radius:var(--radius-sm);padding:14px;margin-bottom:12px;
 }
 .found-box h3{color:#065f46;margin-bottom:6px;font-size:13px;}
+.info-box{
+  background:#eff6ff;border:1px solid #bfdbfe;border-radius:var(--radius-sm);padding:12px;
+  color:#1e40af;text-align:center;font-size:13px;margin-bottom:12px;
+}
 .not-found{
-  background:#fef2f2;border:1px solid #fecaca;
-  border-radius:var(--radius-sm);padding:12px;
-  color:#dc2626;text-align:center;font-size:13px;
-  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius-sm);padding:12px;
+  color:#dc2626;text-align:center;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;
 }
 
 /* ── STATS ── */
-.stats-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:14px;margin-bottom:16px;
-}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px;}
 .stat-card{
-  background:#fff;border-radius:var(--radius);
-  padding:20px;text-align:center;
-  box-shadow:var(--shadow-md);
-  border:1px solid var(--border);
-  position:relative;overflow:hidden;
-  transition:transform 0.2s;
+  background:#fff;border-radius:var(--radius);padding:20px;text-align:center;box-shadow:var(--shadow-md);
+  border:1px solid var(--border);position:relative;overflow:hidden;transition:transform 0.2s;
 }
 .stat-card:hover{transform:translateY(-2px);}
-.stat-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
 .stat-card:nth-child(1)::before{background:linear-gradient(90deg,var(--accent),#8b5cf6);}
 .stat-card:nth-child(2)::before{background:linear-gradient(90deg,var(--danger),#f97316);}
 .stat-card:nth-child(3)::before{background:linear-gradient(90deg,var(--success),#06b6d4);}
@@ -420,250 +261,148 @@ tr:hover td{background:#f8fafc;}
 
 /* ── SCAN INFO BAR ── */
 .scan-info-bar{
-  background:#fff;border-radius:var(--radius);
-  padding:14px 18px;margin-bottom:14px;
+  background:#fff;border-radius:var(--radius);padding:14px 18px;margin-bottom:14px;
   box-shadow:var(--shadow-md);border:1px solid var(--border);
   display:flex;align-items:center;gap:20px;flex-wrap:wrap;
 }
-.scan-info-bar label{font-size:11px;color:var(--text-muted);font-weight:700;text-transform:uppercase;}
-.scan-count-badge{
-  font-size:22px;font-weight:800;color:var(--primary);
-  line-height:1;
-}
+.scan-count-badge{font-size:22px;font-weight:800;color:var(--primary);line-height:1;}
 .save-all-btn{
-  margin-left:auto;
-  padding:10px 20px;
-  background:linear-gradient(135deg,var(--success),#059669);
-  color:#fff;border:none;border-radius:var(--radius-sm);
-  font-size:13px;font-weight:700;cursor:pointer;
-  font-family:inherit;display:none;
-  transition:all 0.2s;
-  box-shadow:0 2px 8px rgba(16,185,129,0.25);
+  margin-left:auto;padding:10px 20px;background:linear-gradient(135deg,var(--success),#059669);
+  color:#fff;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:700;cursor:pointer;
+  font-family:inherit;display:none;transition:all 0.2s;box-shadow:0 2px 8px rgba(16,185,129,0.25);
 }
 .save-all-btn:hover{box-shadow:0 4px 14px rgba(16,185,129,0.4);transform:translateY(-1px);}
 
 /* ── SPINNER ── */
 .spinner{
-  display:inline-block;width:14px;height:14px;
-  border:2px solid rgba(255,255,255,0.3);
-  border-top-color:#fff;border-radius:50%;
-  animation:spin 0.6s linear infinite;
-  vertical-align:middle;margin-right:6px;
+  display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);
+  border-top-color:#fff;border-radius:50%;animation:spin 0.6s linear infinite;vertical-align:middle;margin-right:6px;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ── LOADING OVERLAY ── */
 .load-overlay{
-  position:fixed;inset:0;
-  background:rgba(15,23,42,0.5);
-  backdrop-filter:blur(4px);
-  z-index:200;display:flex;
-  align-items:center;justify-content:center;
+  position:fixed;inset:0;background:rgba(15,23,42,0.5);backdrop-filter:blur(4px);
+  z-index:200;display:flex;align-items:center;justify-content:center;
 }
 .load-box{
-  background:#fff;border-radius:var(--radius);
-  padding:28px 36px;text-align:center;
-  font-size:14px;box-shadow:var(--shadow-lg);
-  color:var(--text-muted);font-weight:500;
+  background:#fff;border-radius:var(--radius);padding:28px 36px;text-align:center;
+  font-size:14px;box-shadow:var(--shadow-lg);color:var(--text-muted);font-weight:500;
 }
 .load-sp{
-  width:36px;height:36px;
-  border:3px solid #e2e8f0;
-  border-top-color:var(--accent);
-  border-radius:50%;
-  animation:spin 0.7s linear infinite;
-  margin:0 auto 14px;
+  width:36px;height:36px;border:3px solid #e2e8f0;border-top-color:var(--accent);
+  border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 14px;
 }
 
 /* ── TOAST ── */
 #toast{
-  position:fixed;bottom:24px;right:24px;
-  background:linear-gradient(135deg,var(--primary),var(--primary-light));
-  color:#fff;padding:12px 18px;border-radius:10px;
-  font-size:13px;opacity:0;transition:all 0.3s;
-  pointer-events:none;z-index:999;
-  max-width:320px;font-weight:500;
-  box-shadow:0 8px 24px rgba(0,0,0,0.2);
-  display:flex;align-items:center;gap:8px;
-  transform:translateY(8px);
+  position:fixed;bottom:24px;right:24px;background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  color:#fff;padding:12px 18px;border-radius:10px;font-size:13px;opacity:0;transition:all 0.3s;
+  pointer-events:none;z-index:999;max-width:320px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,0.2);
+  display:flex;align-items:center;gap:8px;transform:translateY(8px);
 }
 #toast.show{opacity:1;transform:translateY(0);}
 
 /* ── MODAL ── */
 .modal-bg{
-  display:none;position:fixed;inset:0;
-  background:rgba(15,23,42,0.6);
-  backdrop-filter:blur(6px);
+  display:none;position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(6px);
   z-index:500;align-items:center;justify-content:center;
 }
 .modal-bg.open{display:flex;}
 .modal-box{
-  background:#fff;border-radius:16px;
-  padding:32px 36px;width:340px;
-  text-align:center;box-shadow:var(--shadow-lg);
-  animation:modalIn 0.25s ease;
+  background:#fff;border-radius:16px;padding:32px 36px;width:340px;text-align:center;
+  box-shadow:var(--shadow-lg);animation:modalIn 0.25s ease;
 }
 @keyframes modalIn{from{opacity:0;transform:scale(0.94) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .modal-emoji{font-size:40px;margin-bottom:12px;}
 .modal-title{font-size:18px;font-weight:700;margin-bottom:6px;}
 .modal-sub{font-size:12.5px;color:var(--text-muted);margin-bottom:20px;}
 .modal-input{
-  width:100%;padding:12px;
-  border:2px solid var(--border);
-  border-radius:var(--radius-sm);
-  font-size:16px;text-align:center;
-  letter-spacing:4px;margin-bottom:12px;
-  font-family:monospace;transition:all 0.2s;
+  width:100%;padding:12px;border:2px solid var(--border);border-radius:var(--radius-sm);
+  font-size:16px;text-align:center;letter-spacing:4px;margin-bottom:12px;font-family:monospace;transition:all 0.2s;
 }
-.modal-input:focus{
-  outline:none;border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(99,102,241,0.1);
-}
-.modal-err{
-  color:var(--danger);font-size:12px;
-  margin-bottom:10px;display:none;
-  background:#fef2f2;padding:7px;
-  border-radius:6px;
-}
+.modal-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,102,241,0.1);}
+.modal-err{color:var(--danger);font-size:12px;margin-bottom:10px;display:none;background:#fef2f2;padding:7px;border-radius:6px;}
 .modal-btn-primary{
-  width:100%;padding:12px;
-  background:linear-gradient(135deg,var(--primary),var(--primary-light));
-  color:#fff;border:none;border-radius:var(--radius-sm);
-  font-size:14px;font-weight:700;cursor:pointer;
-  font-family:inherit;transition:all 0.2s;
-  box-shadow:var(--shadow-sm);
+  width:100%;padding:12px;background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  color:#fff;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:700;cursor:pointer;
+  font-family:inherit;transition:all 0.2s;box-shadow:var(--shadow-sm);
 }
-.modal-btn-primary:hover{
-  background:linear-gradient(135deg,var(--accent),var(--accent-hover));
-  box-shadow:0 4px 14px rgba(99,102,241,0.3);
-}
+.modal-btn-primary:hover{background:linear-gradient(135deg,var(--accent),var(--accent-hover));box-shadow:0 4px 14px rgba(99,102,241,0.3);}
 .modal-btn-cancel{
-  width:100%;padding:10px;background:none;
-  color:var(--text-muted);border:none;
-  font-size:13px;cursor:pointer;margin-top:8px;
-  font-family:inherit;transition:color 0.2s;
-  font-weight:500;
+  width:100%;padding:10px;background:none;color:var(--text-muted);border:none;font-size:13px;
+  cursor:pointer;margin-top:8px;font-family:inherit;transition:color 0.2s;font-weight:500;
 }
 .modal-btn-cancel:hover{color:var(--text);}
 
 /* ── SIZE TYPE SWITCHER ── */
-.size-type-wrap{
-  display:flex;gap:6px;margin:8px 0;
-  align-items:center;flex-wrap:wrap;
-}
+.size-type-wrap{display:flex;gap:6px;margin:8px 0;align-items:center;flex-wrap:wrap;}
 .size-type-btn{
-  padding:6px 16px;
-  border:2px solid var(--border);
-  border-radius:20px;font-size:12.5px;
-  font-weight:700;cursor:pointer;
-  background:#fff;color:var(--text-muted);
-  transition:all 0.2s;font-family:inherit;
+  padding:6px 16px;border:2px solid var(--border);border-radius:20px;font-size:12.5px;font-weight:700;
+  cursor:pointer;background:#fff;color:var(--text-muted);transition:all 0.2s;font-family:inherit;
 }
 .size-type-btn.active{
   background:linear-gradient(135deg,var(--primary),var(--primary-light));
-  border-color:transparent;color:#fff;
-  box-shadow:var(--shadow-sm);
+  border-color:transparent;color:#fff;box-shadow:var(--shadow-sm);
 }
 .size-range-wrap{
-  display:flex;gap:8px;align-items:center;
-  background:#f8fafc;padding:6px 12px;
+  display:flex;gap:8px;align-items:center;background:#f8fafc;padding:6px 12px;
   border-radius:20px;border:1px solid var(--border);
 }
 .size-range-wrap span{font-size:11.5px;color:var(--text-muted);font-weight:500;}
 .size-range-wrap select{
-  padding:3px 8px;border:1.5px solid var(--border);
-  border-radius:6px;font-size:12.5px;font-weight:700;
-  font-family:inherit;background:#fff;
+  padding:3px 8px;border:1.5px solid var(--border);border-radius:6px;font-size:12.5px;
+  font-weight:700;font-family:inherit;background:#fff;
 }
 
 /* ── CZ INPUT ── */
-.cz-wrap{
-  margin-top:12px;display:flex;
-  align-items:center;gap:10px;
-}
-.cz-wrap label{
-  font-size:12.5px;font-weight:600;
-  white-space:nowrap;color:var(--text-muted);
-}
+.cz-wrap{margin-top:12px;display:flex;align-items:center;gap:10px;}
+.cz-wrap label{font-size:12.5px;font-weight:600;white-space:nowrap;color:var(--text-muted);}
 .cz-wrap input{
-  flex:1;padding:9px 13px;
-  border:1.5px solid var(--border);
-  border-radius:var(--radius-sm);
-  font-size:13.5px;font-family:monospace;
-  transition:all 0.2s;
+  flex:1;padding:9px 13px;border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  font-size:13.5px;font-family:monospace;transition:all 0.2s;
 }
-.cz-wrap input:focus{
-  outline:none;border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(99,102,241,0.1);
-}
+.cz-wrap input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,102,241,0.1);}
 
 /* ── LOCK MSG ── */
 .lock-msg{
-  margin-top:12px;font-size:12px;
-  color:#b45309;padding:10px 14px;
-  background:#fffbeb;border-radius:8px;
-  border:1px solid #fde68a;
-  display:flex;align-items:center;gap:8px;
-  font-weight:500;
+  margin-top:12px;font-size:12px;color:#b45309;padding:10px 14px;background:#fffbeb;
+  border-radius:8px;border:1px solid #fde68a;display:flex;align-items:center;gap:8px;font-weight:500;
 }
 
-/* ── SAVE ERROR BOX (retry) ── */
+/* ── SAVE ERROR BOX ── */
 .save-err-box{
-  background:#fef2f2;border:1.5px solid #fecaca;
-  border-radius:var(--radius-sm);padding:12px 14px;
-  margin-top:12px;color:#991b1b;font-size:12.5px;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:10px;flex-wrap:wrap;
+  background:#fef2f2;border:1.5px solid #fecaca;border-radius:var(--radius-sm);padding:12px 14px;
+  margin-top:12px;color:#991b1b;font-size:12.5px;display:flex;align-items:center;
+  justify-content:space-between;gap:10px;flex-wrap:wrap;
 }
 .save-err-box b{display:block;margin-bottom:2px;font-size:13px;}
 .save-err-box .retry-btn{
-  padding:7px 16px;background:linear-gradient(135deg,#ef4444,#dc2626);
-  color:#fff;border:none;border-radius:7px;font-size:12px;
-  font-weight:700;cursor:pointer;font-family:inherit;
-  white-space:nowrap;transition:all 0.2s;
+  padding:7px 16px;background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;border:none;
+  border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.2s;
 }
 .save-err-box .retry-btn:hover{box-shadow:0 4px 10px rgba(239,68,68,0.35);}
 
 /* ── TABLE SEARCH BAR ── */
-.table-toolbar{
-  display:flex;gap:8px;margin-bottom:12px;
-  flex-wrap:wrap;align-items:center;
-}
+.table-toolbar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center;}
 .table-search{
-  padding:8px 13px;border:1.5px solid var(--border);
-  border-radius:var(--radius-sm);font-size:13px;
-  font-family:inherit;flex:1;max-width:220px;
-  transition:all 0.2s;
+  padding:8px 13px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:13px;
+  font-family:inherit;flex:1;max-width:220px;transition:all 0.2s;
 }
-.table-search:focus{
-  outline:none;border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(99,102,241,0.1);
-}
+.table-search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,102,241,0.1);}
 
 /* ── ACTION BUTTONS IN TABLE ── */
 .tbl-btn{
-  padding:4px 10px;font-size:11px;
-  border-radius:5px;cursor:pointer;
-  font-weight:600;font-family:inherit;
-  transition:all 0.15s;display:inline-block;
+  padding:4px 10px;font-size:11px;border-radius:5px;cursor:pointer;font-weight:600;
+  font-family:inherit;transition:all 0.15s;display:inline-block;
 }
-.tbl-btn-qr{
-  border:1.5px solid var(--primary-light);
-  background:#fff;color:var(--primary);
-}
+.tbl-btn-qr{border:1.5px solid var(--primary-light);background:#fff;color:var(--primary);}
 .tbl-btn-qr:hover{background:var(--primary);color:#fff;}
-.tbl-btn-del{
-  border:1.5px solid var(--danger);
-  background:#fff;color:var(--danger);
-}
+.tbl-btn-del{border:1.5px solid var(--danger);background:#fff;color:var(--danger);}
 .tbl-btn-del:hover{background:var(--danger);color:#fff;}
 
 /* ── STATUS BADGES ── */
-.status-badge{
-  display:inline-flex;align-items:center;gap:4px;
-  font-size:11px;padding:3px 9px;
-  border-radius:20px;font-weight:600;
-}
+.status-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600;}
 .status-kirim{background:#f0fdf4;color:#166534;}
 .status-chiqim{background:#fef2f2;color:#991b1b;}
 .status-saved{background:#f0fdf4;color:#166534;}
@@ -696,79 +435,26 @@ input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 input[type=number]{-moz-appearance:textfield}
 
-/* ── DIVIDER ── */
 .section-label{
-  font-size:11px;color:var(--text-muted);
-  font-weight:700;text-transform:uppercase;
-  letter-spacing:0.8px;margin-bottom:8px;
-  display:flex;align-items:center;gap:8px;
+  font-size:11px;color:var(--text-muted);font-weight:700;text-transform:uppercase;
+  letter-spacing:0.8px;margin-bottom:8px;display:flex;align-items:center;gap:8px;
 }
-.section-label::after{
-  content:'';flex:1;height:1px;background:var(--border);
-}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);}
 
-/* ── CARD ACCENT ── */
-.card-accent{border-left:3px solid var(--accent);}
-.card-accent-green{border-left:3px solid var(--success);}
-.card-accent-red{border-left:3px solid var(--danger);}
-
-/* ── FOOTER ── */
 .app-footer{
-  text-align:center;
-  padding:20px 24px;
-  font-size:11.5px;
-  color:var(--text-light);
-  border-top:1px solid var(--border);
-  margin-top:8px;
-  background:#fff;
+  text-align:center;padding:20px 24px;font-size:11.5px;color:var(--text-light);
+  border-top:1px solid var(--border);margin-top:8px;background:#fff;
 }
 .app-footer span{color:var(--text-muted);font-weight:600;}
-
-/* ── HEADER SUBTITLE ── */
 .header-sub{font-size:10px;color:rgba(255,255,255,0.45);font-weight:400;margin-top:1px;}
 
-/* ── CHIP ── */
-.chip{
-  display:inline-flex;align-items:center;gap:4px;
-  font-size:10.5px;padding:2px 9px;
-  border-radius:20px;font-weight:600;
-  background:rgba(255,255,255,0.1);
-  border:1px solid rgba(255,255,255,0.15);
-  color:rgba(255,255,255,0.75);
-}
-
-/* ── IMPROVED TABLE ROWS ── */
-tr:nth-child(even) td{background:#fafbfc;}
-tr:nth-child(even):hover td{background:#f4f6fa;}
-
-/* ── CARD HEADER WITH ICON BOX ── */
-.card-icon-box{
-  width:30px;height:30px;
-  border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:15px;flex-shrink:0;
-}
+.card-icon-box{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
 .cib-blue{background:#eff6ff;}
 .cib-green{background:#f0fdf4;}
 .cib-red{background:#fef2f2;}
 .cib-purple{background:#f5f3ff;}
-
-/* ── PAGE TITLE ── */
-.page-header{
-  display:flex;align-items:center;gap:10px;
-  margin-bottom:2px;padding:16px 0 4px;
-}
-.page-header h2{font-size:15px;font-weight:700;color:var(--text);}
-.page-header p{font-size:12px;color:var(--text-muted);}
-
-/* ── BADGE COUNT ── */
-.count-pill{
-  display:inline-block;
-  background:var(--accent);color:#fff;
-  font-size:10px;font-weight:700;
-  padding:1px 7px;border-radius:20px;
-  margin-left:4px;
-}
+.ct-main{font-size:13px;font-weight:700;color:var(--text);text-transform:none;letter-spacing:0}
+.ct-sub{font-size:11px;color:var(--text-muted);font-weight:400;margin-top:1px;text-transform:none;letter-spacing:0}
 </style>
 </head>
 <body>
@@ -782,7 +468,7 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
       <div class="header-sub">Ombor boshqaruv tizimi</div>
     </div>
   </div>
-  <span class="badge">v2.2</span>
+  <span class="badge">v2.3</span>
   <div class="conn" id="connStatus">Ulanmoqda...</div>
   <button class="auth-btn" id="authBtn" onclick="showAuth()">🔑 Kirish</button>
 </header>
@@ -802,27 +488,21 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
 
 <!-- TABS -->
 <div class="tabs">
-  <div class="tab active" onclick="showTab('kirim',this)">
-    <span class="tab-icon">📥</span> Kirim qilish
-  </div>
-  <div class="tab" onclick="showTab('chiqim',this)">
-    <span class="tab-icon">📤</span> Chiqim qilish
-  </div>
-  <div class="tab" onclick="showTab('bugun',this)">
-    <span class="tab-icon">📊</span> Bugungi hisobot
-  </div>
+  <div class="tab active" onclick="showTab('kirim',this)"><span class="tab-icon">📥</span> Kirim qilish</div>
+  <div class="tab" onclick="showTab('chiqim',this)"><span class="tab-icon">📤</span> Chiqim qilish</div>
+  <div class="tab" onclick="showTab('bugun',this)"><span class="tab-icon">📊</span> Bugungi hisobot</div>
 </div>
 
 <!-- ══════════════ KIRIM ══════════════ -->
 <div class="page active" id="tab-kirim">
 
-  <div class="card card-accent-purple" style="border-left:3px solid var(--accent);">
+  <div class="card" style="border-left:3px solid var(--accent);">
     <div class="card-title">
       <div style="display:flex;align-items:center;gap:10px">
         <div class="card-icon-box cib-purple">🔍</div>
         <div>
-          <div style="font-size:13px;font-weight:700;color:var(--text);text-transform:none;letter-spacing:0">Trimkarta orqali yuklash</div>
-          <div style="font-size:11px;color:var(--text-muted);font-weight:400;margin-top:1px">Buyurtma raqamini kiriting yoki skanerlang</div>
+          <div class="ct-main">Trimkarta orqali yuklash</div>
+          <div class="ct-sub">Buyurtma raqamini kiriting yoki skanerlang</div>
         </div>
       </div>
     </div>
@@ -868,13 +548,9 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
         <button id="btn-char" class="size-type-btn" onclick="switchSizeType('char')">🔤 Harfli</button>
         <span id="size-range-wrap" class="size-range-wrap">
           <span>Dan:</span>
-          <select id="size-from" onchange="updateSizeGrid()">
-            <option>40</option><option>42</option><option>44</option><option>46</option><option>48</option><option>50</option><option>52</option><option>54</option><option>56</option><option>58</option><option>60</option><option>62</option><option>64</option><option>66</option><option>68</option><option>70</option><option>72</option><option>74</option><option>76</option><option>78</option><option>80</option><option>82</option><option>84</option><option>86</option><option>88</option><option>90</option><option>92</option><option>94</option><option>96</option><option>98</option><option>100</option><option>102</option><option>104</option><option>106</option><option>108</option><option>110</option><option>112</option><option>114</option><option>116</option><option>118</option><option>120</option><option>122</option><option>124</option><option>126</option><option>128</option><option>130</option><option>132</option><option>134</option><option>136</option><option>138</option><option>140</option><option>142</option><option>144</option><option>146</option><option>148</option><option>150</option><option>152</option><option>154</option><option>156</option><option>158</option><option>160</option><option>162</option><option>164</option><option>166</option><option>168</option><option>170</option><option>172</option><option>174</option><option>176</option><option>178</option><option>180</option><option>182</option><option>184</option><option>186</option><option>188</option><option>190</option><option>192</option><option>194</option><option>196</option><option>198</option>
-          </select>
+          <select id="size-from" onchange="updateSizeGrid()"></select>
           <span>Gacha:</span>
-          <select id="size-to" onchange="updateSizeGrid()">
-            <option>40</option><option>42</option><option>44</option><option>46</option><option>48</option><option selected>50</option><option>52</option><option>54</option><option>56</option><option>58</option><option>60</option><option>62</option><option>64</option><option>66</option><option>68</option><option>70</option><option>72</option><option>74</option><option>76</option><option>78</option><option>80</option><option>82</option><option>84</option><option>86</option><option>88</option><option>90</option><option>92</option><option>94</option><option>96</option><option>98</option><option>100</option><option>102</option><option>104</option><option>106</option><option>108</option><option>110</option><option>112</option><option>114</option><option>116</option><option>118</option><option>120</option><option>122</option><option>124</option><option>126</option><option>128</option><option>130</option><option>132</option><option>134</option><option>136</option><option>138</option><option>140</option><option>142</option><option>144</option><option>146</option><option>148</option><option>150</option><option>152</option><option>154</option><option>156</option><option>158</option><option>160</option><option>162</option><option>164</option><option>166</option><option>168</option><option>170</option><option>172</option><option>174</option><option>176</option><option>178</option><option>180</option><option>182</option><option>184</option><option>186</option><option>188</option><option>190</option><option>192</option><option>194</option><option>196</option><option>198</option>
-          </select>
+          <select id="size-to" onchange="updateSizeGrid()"></select>
         </span>
       </div>
       <div class="sizes-grid" id="sizes-grid"></div>
@@ -885,15 +561,11 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
     </div>
 
     <div class="btn-row" id="kirim-btns" style="display:none">
-      <button class="btn btn-purple" id="addKirimBtn" onclick="addKirim()">
-        ✚ Qo'shish va QR yaratish
-      </button>
+      <button class="btn btn-purple" id="addKirimBtn" onclick="addKirim()">✚ Qo'shish va QR yaratish</button>
       <button class="btn btn-outline" onclick="clearKirimForm()">↺ Tozalash</button>
     </div>
     <div id="kirim-save-err"></div>
-    <div class="lock-msg" id="kirim-lock-msg">
-      🔒 Kirim qo'shish uchun avval operator sifatida kiring
-    </div>
+    <div class="lock-msg" id="kirim-lock-msg">🔒 Kirim qo'shish uchun avval operator sifatida kiring</div>
   </div>
 
   <div class="card">
@@ -901,8 +573,8 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
       <div style="display:flex;align-items:center;gap:10px">
         <div class="card-icon-box cib-blue">📋</div>
         <div>
-          <div style="font-size:13px;font-weight:700;color:var(--text);text-transform:none;letter-spacing:0">Kirim jadvali</div>
-          <div style="font-size:11px;color:var(--text-muted);font-weight:400;margin-top:1px" id="kirim-jadval-desc">Bugungi kirim qilingan mahsulotlar</div>
+          <div class="ct-main">Kirim jadvali</div>
+          <div class="ct-sub" id="kirim-jadval-desc">Bugungi kirim qilingan mahsulotlar</div>
         </div>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -912,7 +584,7 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
       </div>
     </div>
     <div class="table-toolbar">
-      <input id="k-search" class="table-search" placeholder="🔍 Qidirish..." oninput="renderKirim()">
+      <input id="k-search" class="table-search" placeholder="🔍 Qidirish..." oninput="debouncedRenderKirim()">
       <button class="btn btn-outline" onclick="selAll()" style="font-size:12px;padding:6px 12px">✓ Hammasini tanla</button>
       <button class="btn btn-outline" onclick="deselAll()" style="font-size:12px;padding:6px 12px">✕ Bekor qilish</button>
     </div>
@@ -946,9 +618,7 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
         </div>
       </div>
     </div>
-    <button class="save-all-btn" id="saveAllBtn" onclick="saveAllChiqim()">
-      💾 Hammasini saqlash (<span id="unsaved-count">0</span> ta)
-    </button>
+    <button class="save-all-btn" id="saveAllBtn" onclick="saveAllChiqim()">💾 Hammasini saqlash</button>
   </div>
 
   <div class="card" style="border-left:3px solid var(--accent);">
@@ -956,8 +626,8 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
       <div style="display:flex;align-items:center;gap:10px">
         <div class="card-icon-box cib-purple">📷</div>
         <div>
-          <div style="font-size:13px;font-weight:700;color:var(--text);text-transform:none;letter-spacing:0">QR-kod skaneri</div>
-          <div style="font-size:11px;color:var(--text-muted);font-weight:400;margin-top:1px">Skanerni quyidagi maydonga yo'naltiring</div>
+          <div class="ct-main">QR-kod skaneri</div>
+          <div class="ct-sub">Skanerni quyidagi maydonga yo'naltiring</div>
         </div>
       </div>
     </div>
@@ -986,8 +656,8 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
       <div style="display:flex;align-items:center;gap:10px">
         <div class="card-icon-box cib-red">📤</div>
         <div>
-          <div style="font-size:13px;font-weight:700;color:var(--text);text-transform:none;letter-spacing:0">Chiqim jadvali</div>
-          <div style="font-size:11px;color:var(--text-muted);font-weight:400;margin-top:1px" id="chiqim-jadval-desc">Bugun chiqarib yuborilgan mahsulotlar</div>
+          <div class="ct-main">Chiqim jadvali</div>
+          <div class="ct-sub" id="chiqim-jadval-desc">Bugun chiqarib yuborilgan mahsulotlar</div>
         </div>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -1014,8 +684,8 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
       <div style="display:flex;align-items:center;gap:10px">
         <div class="card-icon-box cib-blue">📅</div>
         <div>
-          <div style="font-size:13px;font-weight:700;color:var(--text);text-transform:none;letter-spacing:0">Bugungi harakatlar</div>
-          <div style="font-size:11px;color:var(--text-muted);font-weight:400;margin-top:1px">Bugun amalga oshirilgan kirim va chiqimlar</div>
+          <div class="ct-main">Bugungi harakatlar</div>
+          <div class="ct-sub">Bugun amalga oshirilgan kirim va chiqimlar</div>
         </div>
       </div>
     </div>
@@ -1035,7 +705,7 @@ tr:nth-child(even):hover td{background:#f4f6fa;}
 <div id="toast">📢 <span id="toast-msg"></span></div>
 
 <footer class="app-footer">
-  <span>TMO Trikotaj</span> — Ombor boshqaruv tizimi &nbsp;·&nbsp; EGIN GROUP &nbsp;·&nbsp; 2024–2025
+  <span>TMO Trikotaj</span> — Ombor boshqaruv tizimi &nbsp;·&nbsp; EGIN GROUP &nbsp;·&nbsp; 2024–2026
 </footer>
 
 <script>
@@ -1045,11 +715,16 @@ document.addEventListener('wheel', function(e){
   }
 }, {passive:false});
 
-// ⬇⬇⬇  YANGI URL'LAR  ⬇⬇⬇
-var ZAKAZ_URL = 'https://script.google.com/macros/s/AKfycbyffVPgtrxYUbRuroblafhsmRB-AUkTi9pKIB9dKB7QanBA9jniIvCOzoFeuxighaqztQ/exec';
-var OMBOR_URL = 'https://script.google.com/macros/s/AKfycbxyA1D_Y2Jlqh67pYPBFeb4Q7tOxi1Gi33iCLV2Vabob-gkFbXZ38vBjhkgJlgEOBKecg/exec';
+// ══════════════ SOZLAMALAR ══════════════
+var ZAKAZ_URL = 'https://script.google.com/macros/s/AKfycbwdjqqGcxMqwKVCPWozWPhlAhLuDRr3heKFPtKIKoVdHMf1KsFMA5ZHAUTELS2ordGmSA/exec';
+var OMBOR_URL = 'https://script.google.com/macros/s/AKfycbxZKS9CefVo_k1HK5KjlcGv1Bdcpv-ErlX6XvEwGCp1vWVOkNFU4f9rVY6pU5Ayzt38TA/exec';
 var OPERATOR_PASS = 'tmo2024';
-var ALL_SIZES_NUM  = [40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110,112,114,116,118,120,122,124,126,128,130,132,134,136,138,140,142,144,146,148,150,152,154,156,158,160,162,164,166,168,170,172,174,176,178,180,182,184,186,188,190,192,194,196,198];
+var RECENT_DAYS   = 14;   // sayt ochilganda faqat shuncha kunlik ma'lumot yuklanadi (tezlik uchun)
+var MAX_ROWS      = 300;  // jadvalda bir vaqtda ko'rsatiladigan eng ko'p qator (tezlik uchun)
+var PENDING_KEY   = 'pendingChiqim';
+
+var ALL_SIZES_NUM = [];
+for (var _s = 40; _s <= 198; _s += 2) ALL_SIZES_NUM.push(_s);
 var ALL_SIZES_CHAR = ['XXS','XS','S','M','L','XL','XXL','XXXL','4XL','5XL'];
 var SIZE_TYPE = 'num';
 var ALL_SIZES = ALL_SIZES_NUM;
@@ -1058,23 +733,68 @@ var kirimData  = [];
 var chiqimData = [];
 var lastBc     = 10001;
 var dataReady  = false;
-
-function savePendingLocal() {}
-function loadPendingLocal() { return []; }
-function clearPendingLocal() {
-  try { localStorage.removeItem('pendingChiqim'); } catch(e) {}
-}
-var selIds     = new Set();
+var selIds      = new Set();
 var kirimSelIds = new Set();
 var showAllKirim  = false;
 var showAllChiqim = false;
-function todayStr() { return new Date().toISOString().slice(0,10); }
 var isOperator = false;
 var audioCtx   = null;
 var scanTimer  = null;
+var fullHistoryLoaded  = false;
+var fullHistoryLoading = false;
+var _fullHistoryCbs    = [];
 
-document.getElementById('k-sana').valueAsDate = new Date();
-document.getElementById('ch-sana').valueAsDate = new Date();
+// ── Mahalliy (Toshkent) sana — toISOString() UTC beradi, ertalab 05:00 gacha kechagi sanani ko'rsatardi
+function todayStr() {
+  var d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
+// ── Barkodlarni doim matn ko'rinishiga keltiramiz (Sheets son qaytarishi mumkin)
+function normBc(v) { return String(v == null ? '' : v).trim(); }
+function normalizeRows(arr) {
+  (arr || []).forEach(function(r) { r.bc = normBc(r.bc); });
+  return arr || [];
+}
+
+// ── Saqlanmagan (kutilayotgan) chiqimlarni brauzerda saqlab turamiz —
+//    sahifa yangilansa ham yo'qolmaydi
+function savePendingLocal() {
+  try {
+    var p = chiqimData.filter(function(r) { return r.pending; });
+    if (p.length) localStorage.setItem(PENDING_KEY, JSON.stringify(p));
+    else localStorage.removeItem(PENDING_KEY);
+  } catch(e) {}
+}
+function loadPendingLocal() {
+  try { return JSON.parse(localStorage.getItem(PENDING_KEY) || '[]') || []; } catch(e) { return []; }
+}
+function mergePending(list) {
+  var restored = 0;
+  (list || []).forEach(function(p) {
+    p.bc = normBc(p.bc);
+    var exists = chiqimData.some(function(r) { return r.bc === p.bc; });
+    if (!exists) {
+      p.pending = true;
+      if (p.holat !== 'Xato') p.holat = 'Kutilmoqda';
+      chiqimData.push(p);
+      restored++;
+    }
+  });
+  return restored;
+}
+
+document.getElementById('k-sana').value  = todayStr();
+document.getElementById('ch-sana').value = todayStr();
+
+// O'lcham "Dan/Gacha" ro'yxatlarini to'ldiramiz
+(function fillSizeSelects() {
+  var opts = ALL_SIZES_NUM.map(function(s) { return '<option>' + s + '</option>'; }).join('');
+  document.getElementById('size-from').innerHTML = opts;
+  document.getElementById('size-to').innerHTML   = opts;
+  document.getElementById('size-from').value = '40';
+  document.getElementById('size-to').value   = '50';
+})();
 
 document.addEventListener('click', function unlockAudio() {
   try {
@@ -1083,7 +803,6 @@ document.addEventListener('click', function unlockAudio() {
     var src = audioCtx.createBufferSource();
     src.buffer = buf; src.connect(audioCtx.destination); src.start(0);
   } catch(e) {}
-  document.removeEventListener('click', unlockAudio);
 }, {once:true});
 
 function playBeep(type) {
@@ -1108,14 +827,9 @@ function playBeep(type) {
   } catch(e) {}
 }
 
-// ══════════════════════════════════════════════════════════════
-// ██  JSONP FUNKSIYA                                          ██
-// ██  - Timeout: 60s                                          ██
-// ██  - Callback timeout'da o'chirilmaydi (ReferenceError yo'q)██
-// ██  - Console log qo'shildi (F12 da debug qilish oson)     ██
-// ══════════════════════════════════════════════════════════════
+// ══════════════ JSONP ══════════════
 function jsonp(url, params, cb) {
-  var name = 'cb_' + Date.now() + '_' + Math.floor(Math.random()*9999);
+  var name = 'cb_' + Date.now() + '_' + Math.floor(Math.random()*99999);
   params.callback = name;
   var qs = Object.keys(params).map(function(k) {
     return k + '=' + encodeURIComponent(params[k]);
@@ -1127,44 +841,35 @@ function jsonp(url, params, cb) {
 
   function cleanup() {
     clearTimeout(timeoutId);
-    // Callback'ni darhol o'chirmaymiz — bo'sh funksiya qo'yamiz
-    // shunda kech kelgan javob ReferenceError bermaydi
     window[name] = function() {
-      console.log('⚠️ JSONP kech javob keldi (timeout bo\'lgandan keyin):', params.action);
+      console.log('⚠️ JSONP kech javob keldi:', params.action);
     };
-    // 2 daqiqadan keyin butunlay tozalaymiz
     setTimeout(function() { try { delete window[name]; } catch(e) {} }, 120000);
     try { document.head.removeChild(s); } catch(e) {}
   }
 
   window[name] = function(data) {
     if (done) return;
-    done = true;
-    cleanup();
-    console.log('✅ JSONP javob keldi:', params.action, data && data.status);
+    done = true; cleanup();
     cb(null, data);
   };
-
   s.onerror = function() {
     if (done) return;
-    done = true;
-    cleanup();
-    console.error('❌ JSONP script yuklashda xatolik:', params.action, url);
+    done = true; cleanup();
+    console.error('❌ JSONP xatolik:', params.action);
     cb(new Error('Script yuklashda xatolik'));
   };
-
   timeoutId = setTimeout(function() {
     if (done) return;
-    done = true;
-    cleanup();
-    console.error('⏰ JSONP timeout (60s):', params.action, url);
+    done = true; cleanup();
+    console.error('⏰ JSONP timeout (60s):', params.action);
     cb(new Error('timeout'));
   }, 60000);
 
   document.head.appendChild(s);
-  console.log('📡 JSONP so\'rov yuborildi:', params.action);
 }
 
+// ══════════════ OPERATOR ══════════════
 function showAuth() {
   if (isOperator) { logoutOp(); return; }
   document.getElementById('authModal').classList.add('open');
@@ -1201,12 +906,12 @@ function logoutOp() {
   renderKirim(); renderChiqim();
   toast('Operator rejimidan chiqildi');
 }
-
 document.getElementById('passInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') checkPass();
 });
 
 function showLoad(msg) {
+  hideLoad();
   var d = document.createElement('div');
   d.className = 'load-overlay'; d.id = 'loadOv';
   d.innerHTML = '<div class="load-box"><div class="load-sp"></div>' + (msg || 'Ma\'lumotlar yuklanmoqda...') + '</div>';
@@ -1224,26 +929,13 @@ function showTab(name, el) {
   el.classList.add('active');
   if (name === 'bugun') renderBugun();
   if (name === 'chiqim') {
-    document.getElementById('ch-sana').valueAsDate = new Date();
+    document.getElementById('ch-sana').value = todayStr();
     document.getElementById('scan-count').textContent = '0';
     setTimeout(function() { focusScan(); }, 150);
   }
 }
 
-// ══════════════════════════════════════════════════════════════
-// ██  TUZATILGAN loadFromSheets                                ██
-// ██  Eski: sayt ochilganda BUTUN tarixni (minglab qator)      ██
-// ██        bir vaqtda yuklardi — jadval kattalashgani sari    ██
-// ██        sayt tobora sekin ochiladigan bo'lib qolardi       ██
-// ██  Yangi: faqat so'nggi RECENT_DAYS kunlik ma'lumot         ██
-// ██        yuklanadi. To'liq tarix faqat "Eski ma'lumotlarni  ██
-// ██        ko'rsatish" bosilganda, bir martagina, orqa fonda  ██
-// ██        yuklanadi (ensureFullHistoryLoaded funksiyasi).    ██
-// ══════════════════════════════════════════════════════════════
-var RECENT_DAYS = 45;
-var fullHistoryLoaded = false;
-var fullHistoryLoading = false;
-
+// ══════════════ MA'LUMOT YUKLASH ══════════════
 function loadFromSheets() {
   showLoad('Ma\'lumotlar yuklanmoqda...');
   jsonp(OMBOR_URL, {action:'getData', days:RECENT_DAYS}, function(err, d) {
@@ -1252,56 +944,57 @@ function loadFromSheets() {
     if (err || !d || d.status !== 'ok') {
       s.textContent = '✕ Ulanmadi';
       s.className = 'conn err';
-      console.error('❌ Sheets ulanish xatoligi:', err, d);
-      toast('⚠ Sheets\'dan ma\'lumot yuklanmadi. F12 konsolni tekshiring.');
+      toast('⚠ Sheets\'dan ma\'lumot yuklanmadi. Sahifani yangilang.');
+      // Saqlanmagan chiqimlarni baribir ko'rsatamiz
+      mergePending(loadPendingLocal());
+      renderChiqim(); updateSaveBtn();
       return;
     }
     s.textContent = '✓ Sheets ulandi';
     s.className = 'conn ok';
-    kirimData = d.kirim || [];
-    var sheetChiqim = d.chiqim || [];
-    chiqimData = sheetChiqim;
-    clearPendingLocal();
+    kirimData  = normalizeRows(d.kirim);
+    chiqimData = normalizeRows(d.chiqim);
+
+    var restored = mergePending(loadPendingLocal());
+    savePendingLocal(); // Sheets'da allaqachon borlarini ro'yxatdan chiqarib tashlaydi
+
     if (kirimData.length) {
       var mx = Math.max.apply(null, kirimData.map(function(r) { return parseInt(r.bc) || 0; }));
       if (mx >= lastBc) lastBc = mx;
     }
     dataReady = true;
-    console.log('✅ So\'nggi ' + RECENT_DAYS + ' kunlik ma\'lumot yuklandi: kirim=' + kirimData.length + ', chiqim=' + chiqimData.length);
     renderKirim(); renderChiqim(); updateSaveBtn();
+    if (restored) toast('⚠ ' + restored + ' ta saqlanmagan chiqim tiklandi — "Hammasini saqlash"ni bosing');
   });
 }
 
-// "Eski ma'lumotlarni ko'rsatish" birinchi marta bosilganda to'liq tarixni
-// (barcha sanalar) orqa fonda bir martagina yuklab oladi. Keyingi bosishlarda
-// qayta so'rov yubormaydi — xotiradagi ma'lumotdan foydalanadi.
+// To'liq tarixni bir martagina yuklaydi. Bir vaqtda bir necha joydan chaqirilsa,
+// hammasi navbatga qo'yiladi va yuklanish tugagach bajariladi.
 function ensureFullHistoryLoaded(cb) {
   if (fullHistoryLoaded) { cb(); return; }
-  if (fullHistoryLoading) { return; } // allaqachon yuklanmoqda, qayta bosishni e'tiborsiz qoldiramiz
+  _fullHistoryCbs.push(cb);
+  if (fullHistoryLoading) return;
   fullHistoryLoading = true;
   showLoad('To\'liq tarix yuklanmoqda... (birinchi marta biroz vaqt olishi mumkin)');
-  jsonp(OMBOR_URL, {action:'getData'}, function(err, d) { // 'days' YO'Q => TO'LIQ tarix
+  jsonp(OMBOR_URL, {action:'getData'}, function(err, d) {
     hideLoad();
     fullHistoryLoading = false;
     if (err || !d || d.status !== 'ok') {
-      toast('⚠ To\'liq tarixni yuklab bo\'lmadi, faqat so\'nggi ma\'lumotlar ko\'rsatiladi');
-      cb();
-      return;
+      toast('⚠ To\'liq tarixni yuklab bo\'lmadi, faqat so\'nggi ma\'lumotlar ishlatiladi');
+    } else {
+      var pendingNow = chiqimData.filter(function(r) { return r.pending; });
+      kirimData  = normalizeRows(d.kirim);
+      chiqimData = normalizeRows(d.chiqim);
+      mergePending(pendingNow);
+      savePendingLocal();
+      fullHistoryLoaded = true;
     }
-    // Chiqim'da hali Sheets'ga yozilmagan (pending) yozuvlar bo'lishi mumkin —
-    // ularni to'liq ro'yxatga qo'shib qo'yamiz, aks holda ekrandan yo'qolib qoladi
-    var pendingChiqim = chiqimData.filter(function(r) { return r.pending; });
-    kirimData  = d.kirim  || [];
-    chiqimData = d.chiqim || [];
-    pendingChiqim.forEach(function(p) {
-      if (!chiqimData.some(function(r) { return r.bc === p.bc; })) chiqimData.push(p);
-    });
-    fullHistoryLoaded = true;
-    console.log('✅ To\'liq tarix yuklandi: kirim=' + kirimData.length + ', chiqim=' + chiqimData.length);
-    cb();
+    var cbs = _fullHistoryCbs; _fullHistoryCbs = [];
+    cbs.forEach(function(f) { try { f(); } catch(e) { console.error(e); } });
   });
 }
 
+// ══════════════ KIRIM ══════════════
 function fetchOrder() {
   if (!isOperator) { showAuth(); return; }
   var trim = document.getElementById('trim-inp').value.trim().toUpperCase();
@@ -1374,35 +1067,16 @@ function switchSizeType(type) {
 function updateSizeGrid() {
   var active = getActiveSizes();
   var old = {};
-  ALL_SIZES_NUM.forEach(function(s) { var el = document.getElementById('s' + s); if (el) old[s] = el.value; });
-  ALL_SIZES_CHAR.forEach(function(s) { var el = document.getElementById('s' + s); if (el) old[s] = el.value; });
+  ALL_SIZES_NUM.concat(ALL_SIZES_CHAR).forEach(function(s) {
+    var el = document.getElementById('s' + s); if (el) old[s] = el.value;
+  });
   document.getElementById('sizes-grid').innerHTML = active.map(function(s) {
     return '<div class="size-item"><label>' + s + '</label>'
-      + '<input id="s' + s + '" type="number" min="0" placeholder="0" value="' + (old[s] || '') + '" oninput="updateJamiPreview()"></div>';
+      + '<input id="s' + s + '" type="number" min="0" placeholder="0" value="' + (old[s] || '') + '"></div>';
   }).join('');
-  updateJamiPreview();
 }
 
-function updateJamiPreview() {
-  var total = 0;
-  getActiveSizes().forEach(function(s) {
-    var el = document.getElementById('s' + s);
-    if (el) total += parseInt(el.value) || 0;
-  });
-  var el = document.getElementById('k-jami-preview');
-  if (el) el.textContent = total;
-}
-
-// ══════════════════════════════════════════════════════════════
-// ██  TUZATILGAN addKirim                                     ██
-// ██  Eski: forma serverdan javob kelishidan OLDIN            ██
-// ██        tozalanardi — xato/timeout bo'lganda kiritilgan   ██
-// ██        ma'lumot butunlay yo'qolib ketardi                ██
-// ██  Yangi: forma FAQAT muvaffaqiyatli saqlangandan keyin    ██
-// ██        tozalanadi. Xato bo'lsa — "Qayta urinish" tugmasi ██
-// ██        chiqadi, hech narsa yo'qolmaydi.                  ██
-// ══════════════════════════════════════════════════════════════
-var _lastKirimAttempt = null; // muvaffaqiyatsiz urinishda qayta yuborish uchun
+var _lastKirimAttempt = null;
 
 function addKirim() {
   var btn = document.getElementById('addKirimBtn');
@@ -1422,6 +1096,7 @@ function addKirim() {
     var v  = el ? (parseInt(el.value) || 0) : 0;
     sizes[s] = v; jami += v;
   });
+  if (!jami) { toast('⚠ Kamida bitta o\'lcham miqdorini kiriting!'); return; }
 
   var payload = {
     sana:document.getElementById('k-sana').value,
@@ -1430,10 +1105,11 @@ function addKirim() {
     color:document.getElementById('k-color').value.trim(),
     kg:document.getElementById('k-kg').value.trim(),
     cz: czEl ? czEl.value.trim() : '',
-    sizes:sizes, jami:jami
+    sizes:sizes, jami:jami,
+    reqId: 'k' + Date.now() + Math.random().toString(36).slice(2, 8) // takroriy yozilishdan himoya
   };
 
-  _lastKirimAttempt = payload; // xato bo'lsa qayta urinish uchun saqlab qo'yamiz
+  _lastKirimAttempt = payload;
   sendKirimRequest(payload);
 }
 
@@ -1445,14 +1121,14 @@ function sendKirimRequest(payload) {
   jsonp(OMBOR_URL, {
     action:'addKirim', sana:payload.sana, trim:payload.trim,
     client:payload.client, product:payload.product, color:payload.color,
-    sizes:JSON.stringify(payload.sizes), jami:payload.jami, kg:payload.kg, cz:payload.cz
+    sizes:JSON.stringify(positiveSizes(payload.sizes)), jami:payload.jami, kg:payload.kg, cz:payload.cz,
+    reqId:payload.reqId
   }, function(err, d) {
     if (btn) { btn.disabled = false; btn.innerHTML = "✚ Qo'shish va QR yaratish"; }
 
     if (!err && d && d.status === 'ok' && d.bc) {
-      // ✅ MUVAFFAQIYATLI — faqat shu holatda forma tozalanadi
       var row = {
-        id:Date.now(), bc:String(d.bc),
+        id:Date.now(), bc:normBc(d.bc),
         sana:payload.sana, client:payload.client, product:payload.product,
         color:payload.color, trim:payload.trim, kg:payload.kg,
         cz:payload.cz, sizes:payload.sizes, jami:payload.jami
@@ -1465,12 +1141,12 @@ function sendKirimRequest(payload) {
       clearKirimForm();
       toast('✅ Kirim qo\'shildi (№' + row.bc + ') va Sheets\'ga yozildi');
     } else {
-      // ❌ XATO — forma TEGILMAYDI, ma'lumot saqlanib qoladi, "Qayta urinish" chiqadi
       var errBox = document.getElementById('kirim-save-err');
       var reason = err ? err.message : (d && d.msg ? d.msg : 'Noma\'lum xato');
       errBox.innerHTML =
         '<div class="save-err-box">' +
-        '<div><b>⚠ Sheets\'ga yozilmadi</b>Internet aloqasini tekshiring. Kiritgan ma\'lumotlaringiz yo\'qolmadi — "Qayta urinish"ni bosing. (' + reason + ')</div>' +
+        '<div><b>⚠ Sheets\'ga yozilmadi</b>Kiritgan ma\'lumotlaringiz yo\'qolmadi — "Qayta urinish"ni bosing. ' +
+        'Xavotir olmang, qop ikki marta yozilmaydi. (' + reason + ')</div>' +
         '<button class="retry-btn" onclick="retryKirim()">🔄 Qayta urinish</button>' +
         '</div>';
       toast('⚠ Sheets\'ga yozilmadi — pastdagi "Qayta urinish" tugmasini bosing');
@@ -1484,21 +1160,11 @@ function retryKirim() {
 }
 
 function clearKirimForm() {
-  var savedTrim    = document.getElementById('k-trim').value;
-  var savedTrimInp = document.getElementById('trim-inp').value;
-  var savedClient  = document.getElementById('k-client').value;
-  var savedProduct = document.getElementById('k-product').value;
-  var savedColor   = document.getElementById('k-color').value;
+  // Trimkarta, klient, mahsulot, rang saqlanib qoladi (keyingi qop uchun), o'lchamlar tozalanadi
   ['k-trim','k-client','k-product','k-color'].forEach(function(id) {
-    var el = document.getElementById(id);
-    el.setAttribute('readonly','readonly');
+    document.getElementById(id).setAttribute('readonly','readonly');
   });
-  document.getElementById('k-trim').value    = savedTrim;
-  document.getElementById('k-client').value  = savedClient;
-  document.getElementById('k-product').value = savedProduct;
-  document.getElementById('k-color').value   = savedColor;
-  document.getElementById('trim-inp').value  = savedTrimInp;
-  document.getElementById('k-sana').valueAsDate = new Date();
+  document.getElementById('k-sana').value = todayStr();
   document.getElementById('order-results').style.display = 'none';
   document.getElementById('kirim-save-err').innerHTML = '';
 }
@@ -1506,62 +1172,69 @@ function clearKirimForm() {
 function toggleShowAllKirim() {
   var btn = document.getElementById('kirim-toggle-btn');
   var desc = document.getElementById('kirim-jadval-desc');
-
   if (!showAllKirim) {
-    // "Eski ma'lumotlarni ko'rsatish" bosildi — kerak bo'lsa avval to'liq
-    // tarixni yuklab olamiz (faqat birinchi marta, keyin xotiradan ishlatiladi)
     ensureFullHistoryLoaded(function() {
       showAllKirim = true;
       btn.innerHTML = '📅 Faqat bugungini ko\'rsatish';
-      desc.innerHTML = 'Barcha kirim qilingan mahsulotlar';
+      desc.innerHTML = 'Barcha kirim qilingan mahsulotlar (oxirgi ' + MAX_ROWS + ' tasi, qolganini qidiruv orqali toping)';
       renderKirim();
     });
     return;
   }
-
   showAllKirim = false;
   btn.innerHTML = '🕓 Eski ma\'lumotlarni ko\'rsatish';
   desc.innerHTML = 'Bugungi kirim qilingan mahsulotlar';
   renderKirim();
 }
 
+var _kirimSearchTimer = null;
+function debouncedRenderKirim() {
+  clearTimeout(_kirimSearchTimer);
+  _kirimSearchTimer = setTimeout(renderKirim, 250);
+}
+
 function renderKirim() {
   var q = (document.getElementById('k-search').value || '').toLowerCase();
   var today = todayStr();
   var rows = kirimData.filter(function(r) {
-    if (!showAllKirim && r.sana !== today) return false;
+    if (!showAllKirim && !q && r.sana !== today) return false;
     return !q || [r.bc,r.client,r.product,r.color,r.trim].some(function(v) {
       return String(v || '').toLowerCase().indexOf(q) !== -1;
     });
   });
   var tb = document.getElementById('kirim-tbody');
   if (!rows.length) {
-    tb.innerHTML = '<tr><td colspan="13" class="empty"><span class="empty-icon">📭</span>' + (showAllKirim ? 'Hozircha kirim ma\'lumotlari yo\'q' : 'Bugun hech qanday kirim qilinmagan') + '</td></tr>';
+    tb.innerHTML = '<tr><td colspan="13" class="empty"><span class="empty-icon">📭</span>' + (q ? 'Hech narsa topilmadi' : (showAllKirim ? 'Hozircha kirim ma\'lumotlari yo\'q' : 'Bugun hech qanday kirim qilinmagan')) + '</td></tr>';
     return;
   }
+  var total = rows.length;
+  if (rows.length > MAX_ROWS) rows = rows.slice(-MAX_ROWS);
   var html = '';
   rows.forEach(function(r, i) {
     var key = String(r.id || r.bc);
     var sel = selIds.has(key);
-    var kirimChecked = kirimSelIds && kirimSelIds.has(key);
+    var kirimChecked = kirimSelIds.has(key);
     html += '<tr style="' + (sel ? 'background:#f0f4ff' : '') + '">'
       + '<td><input type="checkbox" ' + (sel ? 'checked' : '') + ' onchange="toggleSel(\'' + key + '\',this)"></td>'
-      + '<td><input type="checkbox" ' + (kirimChecked ? 'checked' : '') + ' onchange="toggleKirimSel(\'' + key + '\',this)" title="Nakl uchun"></td>'
-      + '<td style="color:#cbd5e1;font-weight:600">' + (i+1) + '</td>'
+      + '<td><input type="checkbox" ' + (kirimChecked ? 'checked' : '') + ' onchange="toggleKirimSel(\'' + key + '\',this)" title="Nakladnoy uchun"></td>'
+      + '<td style="color:#cbd5e1;font-weight:600">' + (total - rows.length + i + 1) + '</td>'
       + '<td><span class="bc-badge">' + r.bc + '</span></td>'
-      + '<td style="font-family:monospace;font-size:11.5px;font-weight:700;color:#475569">' + r.trim + '</td>'
-      + '<td style="color:#64748b">' + r.sana + '</td>'
-      + '<td style="font-weight:500">' + r.client + '</td>'
-      + '<td><b>' + r.product + '</b></td>'
-      + '<td style="color:#64748b">' + r.color + '</td>'
-      + '<td><b style="color:#0f172a">' + r.jami + '</b></td>'
-      + '<td style="color:#64748b">' + r.kg + '</td>'
+      + '<td style="font-family:monospace;font-size:11.5px;font-weight:700;color:#475569">' + (r.trim||'') + '</td>'
+      + '<td style="color:#64748b">' + (r.sana||'') + '</td>'
+      + '<td style="font-weight:500">' + (r.client||'') + '</td>'
+      + '<td><b>' + (r.product||'') + '</b></td>'
+      + '<td style="color:#64748b">' + (r.color||'') + '</td>'
+      + '<td><b style="color:#0f172a">' + (r.jami||0) + '</b></td>'
+      + '<td style="color:#64748b">' + (r.kg||'') + '</td>'
       + '<td style="font-family:monospace;font-size:11px;color:#94a3b8;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + (r.cz||'') + '">' + (r.cz||'—') + '</td>'
       + '<td style="display:flex;gap:4px">'
       + '<button class="tbl-btn tbl-btn-qr" onclick="printOne(\'' + key + '\')">QR</button>'
-      + '<button class="tbl-btn tbl-btn-del" onclick="deleteKirim(\'' + key + '\')">Del</button>'
+      + (isOperator ? '<button class="tbl-btn tbl-btn-del" onclick="deleteKirim(\'' + key + '\')">Del</button>' : '')
       + '</td></tr>';
   });
+  if (total > rows.length) {
+    html = '<tr><td colspan="13" class="more-rows">Jami ' + total + ' ta — oxirgi ' + rows.length + ' tasi ko\'rsatilmoqda. Kerakli yozuvni qidiruv orqali toping.</td></tr>' + html;
+  }
   tb.innerHTML = html;
 }
 
@@ -1572,17 +1245,30 @@ function printOne(key) {
 
 function toggleSel(id, cb) { if (cb.checked) selIds.add(id); else selIds.delete(id); }
 function toggleAll(cb) {
+  var today = todayStr();
   kirimData.forEach(function(r) {
+    if (!showAllKirim && r.sana !== today) return;
     var k = String(r.id || r.bc);
     if (cb.checked) selIds.add(k); else selIds.delete(k);
   });
   renderKirim();
 }
-function selAll() { kirimData.forEach(function(r) { selIds.add(String(r.id || r.bc)); }); renderKirim(); }
+function selAll() {
+  var today = todayStr();
+  kirimData.forEach(function(r) {
+    if (!showAllKirim && r.sana !== today) return;
+    selIds.add(String(r.id || r.bc));
+  });
+  renderKirim();
+}
 function deselAll() { selIds.clear(); renderKirim(); }
 function toggleKirimSel(id, cb) { if (cb.checked) kirimSelIds.add(id); else kirimSelIds.delete(id); }
 function toggleKirimCheckbox(cb) {
-  kirimData.forEach(function(r){ var k=String(r.id||r.bc); if(cb.checked) kirimSelIds.add(k); else kirimSelIds.delete(k); });
+  var today = todayStr();
+  kirimData.forEach(function(r){
+    if (!showAllKirim && r.sana !== today) return;
+    var k=String(r.id||r.bc); if(cb.checked) kirimSelIds.add(k); else kirimSelIds.delete(k);
+  });
   renderKirim();
 }
 function printKirimNakladnoy() {
@@ -1595,6 +1281,7 @@ function printSelected() {
   doPrint(kirimData.filter(function(r) { return selIds.has(String(r.id || r.bc)); }));
 }
 function deleteKirim(id) {
+  if (!isOperator) { showAuth(); return; }
   if (!confirm('Bu yozuvni o\'chirishni tasdiqlaysizmi?')) return;
   var row = kirimData.find(function(r) { return String(r.id || r.bc) === id; });
   kirimData = kirimData.filter(function(r) { return String(r.id || r.bc) !== id; });
@@ -1603,10 +1290,12 @@ function deleteKirim(id) {
   if (row) {
     jsonp(OMBOR_URL, {action:'deleteKirim', bc:row.bc}, function(err, d) {
       if (!err && d && d.status === 'ok') toast('✅ Sheets\'dan ham o\'chirildi');
+      else toast('⚠ Sheets\'dan o\'chirilmadi — sahifani yangilab tekshiring');
     });
   }
 }
 
+// ══════════════ CHIQIM ══════════════
 function focusScan() { document.getElementById('scan-inp').focus(); }
 
 var _scanEnterPressed = false;
@@ -1627,33 +1316,44 @@ document.getElementById('scan-inp').addEventListener('input', function() {
   scanTimer = setTimeout(function() { processScan(val); }, 350);
 });
 
-function processScan(val) {
-  val = val.trim(); if (!val) return;
-  document.getElementById('scan-inp').value = '';
-  if (!isOperator) { showAuth(); return; }
-  var sana = document.getElementById('ch-sana').value;
-  if (!sana) { toast('⚠ Avval chiqim sanasini tanlang!'); return; }
-  var found = kirimData.find(function(r) { return r.bc === val; });
-  var res   = document.getElementById('scan-result');
-  var box   = document.getElementById('scanner-area');
-  if (!found) {
-    res.innerHTML = '<div class="not-found">❌ Barkod topilmadi: <b>' + val + '</b></div>';
-    flashBox(box, 'err'); playBeep('err'); return;
-  }
-  var used = chiqimData.find(function(c) { return c.bc === val; });
-  if (used) {
-    res.innerHTML = '<div class="not-found">⚠ ' + val + ' allaqachon chiqim qilingan! ' + used.sana + ' | ' + used.qty + ' dona</div>';
-    flashBox(box, 'err'); playBeep('err'); return;
-  }
-  var rec = {
-    id:Date.now(), bc:found.bc, trim:found.trim,
+function makeChiqimRec(found, sana) {
+  return {
+    id:Date.now() + Math.random(), bc:found.bc, trim:found.trim,
     product:found.product, color:found.color,
     client:found.client, buyer:found.client,
     qty:found.jami, kg:found.kg || '', sana:sana,
     sizes:found.sizes || {},
     holat:'Kutilmoqda', pending:true
   };
-  chiqimData.push(rec);
+}
+
+function processScan(val, afterFullLoad) {
+  val = normBc(val); if (!val) return;
+  document.getElementById('scan-inp').value = '';
+  if (!isOperator) { showAuth(); return; }
+  var sana = document.getElementById('ch-sana').value;
+  if (!sana) { toast('⚠ Avval chiqim sanasini tanlang!'); return; }
+  var res = document.getElementById('scan-result');
+  var box = document.getElementById('scanner-area');
+
+  var found = kirimData.find(function(r) { return r.bc === val; });
+
+  // So'nggi kunlarda topilmasa — to'liq tarixdan qidiramiz (eski kirimlar uchun)
+  if (!found && !fullHistoryLoaded && !afterFullLoad) {
+    res.innerHTML = '<div class="info-box">⏳ ' + val + ' eski ma\'lumotlardan qidirilmoqda...</div>';
+    ensureFullHistoryLoaded(function() { processScan(val, true); });
+    return;
+  }
+  if (!found) {
+    res.innerHTML = '<div class="not-found">❌ Barkod topilmadi: <b>' + val + '</b></div>';
+    flashBox(box, 'err'); playBeep('err'); return;
+  }
+  var used = chiqimData.find(function(c) { return c.bc === val; });
+  if (used) {
+    res.innerHTML = '<div class="not-found">⚠ ' + val + ' allaqachon chiqim qilingan! ' + used.sana + ' | ' + used.qty + ' dona' + (used.pending ? ' (hali saqlanmagan)' : '') + '</div>';
+    flashBox(box, 'err'); playBeep('err'); return;
+  }
+  chiqimData.push(makeChiqimRec(found, sana));
   savePendingLocal();
   renderChiqim(); updateSaveBtn();
   var cnt = parseInt(document.getElementById('scan-count').textContent) || 0;
@@ -1682,17 +1382,22 @@ function toggleBulkInput() {
   if (!open) document.getElementById('bulk-inp').focus();
 }
 
-function processBulkChiqim() {
+function processBulkChiqim(afterFullLoad) {
   if (!isOperator) { showAuth(); return; }
   var sana = document.getElementById('ch-sana').value;
   if (!sana) { toast('⚠ Avval chiqim sanasini tanlang!'); return; }
   var raw = document.getElementById('bulk-inp').value || '';
-  var codes = raw.split(/[\s,;]+/).map(function(s) { return s.trim(); }).filter(Boolean);
-  var seenInBatch = {};
-  var uniqueCodes = [];
-  codes.forEach(function(c) { if (!seenInBatch[c]) { seenInBatch[c] = true; uniqueCodes.push(c); } });
-
+  var codes = raw.split(/[\s,;]+/).map(normBc).filter(Boolean);
+  var seen = {}, uniqueCodes = [];
+  codes.forEach(function(c) { if (!seen[c]) { seen[c] = true; uniqueCodes.push(c); } });
   if (!uniqueCodes.length) { toast('⚠ Avval barkodlar ro\'yxatini kiriting!'); return; }
+
+  // Ba'zilari topilmasa — avval to'liq tarixni yuklaymiz
+  var missing = uniqueCodes.some(function(c) { return !kirimData.some(function(r) { return r.bc === c; }); });
+  if (missing && !fullHistoryLoaded && afterFullLoad !== true) {
+    ensureFullHistoryLoaded(function() { processBulkChiqim(true); });
+    return;
+  }
 
   var added = [], notFound = [], alreadyUsed = [];
   uniqueCodes.forEach(function(val) {
@@ -1700,15 +1405,7 @@ function processBulkChiqim() {
     if (!found) { notFound.push(val); return; }
     var used = chiqimData.find(function(c) { return c.bc === val; });
     if (used) { alreadyUsed.push(val); return; }
-    var rec = {
-      id:Date.now() + Math.random(), bc:found.bc, trim:found.trim,
-      product:found.product, color:found.color,
-      client:found.client, buyer:found.client,
-      qty:found.jami, kg:found.kg || '', sana:sana,
-      sizes:found.sizes || {},
-      holat:'Kutilmoqda', pending:true
-    };
-    chiqimData.push(rec);
+    chiqimData.push(makeChiqimRec(found, sana));
     added.push(val);
   });
 
@@ -1719,22 +1416,16 @@ function processBulkChiqim() {
 
   var res = document.getElementById('bulk-result');
   var html = '';
-  if (added.length) {
-    html += '<div class="found-box" style="margin-bottom:8px"><b style="color:#065f46">✅ ' + added.length + ' ta qo\'shildi:</b> ' + added.join(', ') + '</div>';
-  }
-  if (alreadyUsed.length) {
-    html += '<div class="not-found" style="margin-bottom:8px">⚠ ' + alreadyUsed.length + ' ta allaqachon chiqim qilingan: ' + alreadyUsed.join(', ') + '</div>';
-  }
-  if (notFound.length) {
-    html += '<div class="not-found">❌ ' + notFound.length + ' ta barkod topilmadi: ' + notFound.join(', ') + '</div>';
-  }
+  if (added.length) html += '<div class="found-box" style="margin-bottom:8px"><b style="color:#065f46">✅ ' + added.length + ' ta qo\'shildi:</b> ' + added.join(', ') + '</div>';
+  if (alreadyUsed.length) html += '<div class="not-found" style="margin-bottom:8px">⚠ ' + alreadyUsed.length + ' ta allaqachon chiqim qilingan: ' + alreadyUsed.join(', ') + '</div>';
+  if (notFound.length) html += '<div class="not-found">❌ ' + notFound.length + ' ta barkod topilmadi: ' + notFound.join(', ') + '</div>';
   res.innerHTML = html;
 
   var remaining = notFound.concat(alreadyUsed);
   document.getElementById('bulk-inp').value = remaining.join('\n');
 
-  if (added.length && !notFound.length && !alreadyUsed.length) {
-    playBeep('ok'); toast('✅ ' + added.length + ' ta chiqim ro\'yxatga qo\'shildi');
+  if (added.length && !remaining.length) {
+    playBeep('ok'); toast('✅ ' + added.length + ' ta chiqim ro\'yxatga qo\'shildi — endi "Hammasini saqlash"ni bosing');
   } else if (added.length) {
     playBeep('ok'); toast('✅ ' + added.length + ' ta qo\'shildi, ' + remaining.length + ' tasi muammoli');
   } else {
@@ -1745,85 +1436,136 @@ function processBulkChiqim() {
 function updateSaveBtn() {
   var pending = chiqimData.filter(function(r) { return r.pending; });
   var btn = document.getElementById('saveAllBtn');
+  if (btn.disabled) return; // saqlash davom etmoqda
   if (pending.length > 0) {
     btn.style.display = 'inline-block';
-    btn.disabled = false;
-    btn.innerHTML = '💾 Barchasini saqlash (' + pending.length + ' ta)';
+    btn.innerHTML = '💾 Hammasini saqlash (' + pending.length + ' ta)';
   } else {
     btn.style.display = 'none';
-    btn.disabled = false;
   }
 }
 
+var _savingChiqim = false;
 function saveAllChiqim() {
+  if (_savingChiqim) return;
   var pending = chiqimData.filter(function(r) { return r.pending; });
   if (!pending.length) { toast('⚠ Saqlanadigan ma\'lumot yo\'q'); return; }
   var btn = document.getElementById('saveAllBtn');
-  if (btn.disabled) return;
-  btn.innerHTML = '<span class="spinner"></span>Yuborilmoqda...';
+  _savingChiqim = true;
   btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>0/' + pending.length;
+  pending.forEach(function(r) { r.holat = 'Yuborilmoqda...'; });
+  renderChiqim();
 
   var total = pending.length;
   var sent = 0, duplicate = 0, failed = 0, done = 0;
 
-  function sendOne(i) {
-    if (i >= total) {
-      btn.disabled = false;
-      btn.innerHTML = '💾 Barchasini saqlash';
-      updateSaveBtn();
-      if (failed === 0 && duplicate === 0) {
-        toast('✅ ' + sent + ' ta chiqim saqlandi!');
-        playBeep('ok');
-      } else if (failed === 0) {
-        toast('✅ ' + sent + ' ta saqlandi, ' + duplicate + ' tasi allaqachon Sheets\'da bor edi (dublikat)');
-        playBeep('ok');
-      } else {
-        toast('⚠ ' + failed + ' ta yozilmadi — faqat xatolarni qayta saqlang');
-        playBeep('err');
-      }
-      renderChiqim();
-      return;
-    }
-    var rec = pending[i];
-    if (!rec.pending) { sendOne(i + 1); return; }
-    rec.holat = 'Yuborilmoqda...';
+  function finish() {
+    _savingChiqim = false;
+    btn.disabled = false;
+    savePendingLocal();
+    updateSaveBtn();
     renderChiqim();
+    if (failed === 0 && duplicate === 0) {
+      toast('✅ ' + sent + ' ta chiqim saqlandi!'); playBeep('ok');
+    } else if (failed === 0) {
+      toast('✅ ' + sent + ' ta saqlandi, ' + duplicate + ' tasi allaqachon Sheets\'da bor edi'); playBeep('ok');
+    } else {
+      toast('⚠ ' + failed + ' ta yozilmadi — "Hammasini saqlash"ni yana bosing'); playBeep('err');
+    }
+  }
+
+  function progress() {
+    btn.innerHTML = '<span class="spinner"></span>' + done + '/' + total;
+    savePendingLocal(); // har bir natijadan keyin saqlaymiz — yarim yo'lda yopilsa ham yo'qolmaydi
+  }
+
+  // Zaxira: server eski versiyada bo'lsa (addChiqimBatch yo'q) — bittadan yuboramiz
+  function sendSingles(list, i, cb) {
+    if (i >= list.length) { cb(); return; }
+    var rec = list[i];
     jsonp(OMBOR_URL, {
       action:'addChiqim',
       sana:rec.sana, bc:rec.bc, trim:rec.trim,
       client:rec.client, product:rec.product, color:rec.color,
       buyer:rec.buyer || '', qty:rec.qty || 0, kg:rec.kg || '',
-      sizes:JSON.stringify(rec.sizes || {})
+      sizes:JSON.stringify(positiveSizes(rec.sizes))
     }, function(err, d) {
-      if (!err && d && d.status === 'ok') {
-        rec.holat = 'Yozildi'; rec.pending = false; sent++;
-      } else if (!err && d && d.status === 'duplicate') {
-        rec.holat = 'Dublikat (allaqachon bor)'; rec.pending = false; duplicate++;
-      } else {
-        rec.holat = 'Xato'; failed++;
-      }
-      done++;
-      btn.innerHTML = '<span class="spinner"></span>' + done + '/' + total;
-      setTimeout(function(){ sendOne(i + 1); }, 300);
+      if (!err && d && d.status === 'ok') { rec.holat = 'Yozildi'; rec.pending = false; sent++; }
+      else if (!err && d && d.status === 'duplicate') { rec.holat = 'Dublikat (allaqachon bor)'; rec.pending = false; duplicate++; }
+      else { rec.holat = 'Xato'; failed++; }
+      done++; progress();
+      sendSingles(list, i + 1, cb);
     });
   }
-  sendOne(0);
+
+  // Asosiy yo'l: bir so'rovda bir nechta chiqim (addChiqimBatch)
+  var chunks = buildChiqimChunks(pending);
+  function sendChunk(ci) {
+    if (ci >= chunks.length) { finish(); return; }
+    var chunk = chunks[ci];
+    jsonp(OMBOR_URL, {
+      action:'addChiqimBatch',
+      rows:JSON.stringify(chunk.map(function(x) { return x.item; }))
+    }, function(err, d) {
+      if (!err && d && d.status === 'ok') {
+        var skipped = {};
+        (d.skipped || []).forEach(function(b) { skipped[normBc(b)] = true; });
+        chunk.forEach(function(x) {
+          if (skipped[x.rec.bc]) { x.rec.holat = 'Dublikat (allaqachon bor)'; duplicate++; }
+          else { x.rec.holat = 'Yozildi'; sent++; }
+          x.rec.pending = false;
+        });
+        done += chunk.length; progress();
+        sendChunk(ci + 1);
+      } else if (!err && d && d.status === 'error' && /action/i.test(d.msg || '')) {
+        sendSingles(chunk.map(function(x) { return x.rec; }), 0, function() { sendChunk(ci + 1); });
+      } else {
+        chunk.forEach(function(x) { x.rec.holat = 'Xato'; failed++; });
+        done += chunk.length; progress();
+        sendChunk(ci + 1);
+      }
+    });
+  }
+  sendChunk(0);
+}
+
+function positiveSizes(sz) {
+  var out = {};
+  Object.keys(sz || {}).forEach(function(k) { var v = parseInt(sz[k]) || 0; if (v > 0) out[k] = v; });
+  return out;
+}
+
+// Chiqimlarni URL uzunligi oshib ketmaydigan bo'laklarga ajratadi (~5000 belgi yoki 25 ta)
+function buildChiqimChunks(list) {
+  var chunks = [], cur = [], len = 0;
+  list.forEach(function(r) {
+    var item = {
+      sana:r.sana, bc:r.bc, trim:r.trim || '', client:r.client || '',
+      product:r.product || '', color:r.color || '', buyer:r.buyer || '',
+      kg:r.kg || '', qty:r.qty || 0, sizes:positiveSizes(r.sizes)
+    };
+    var l = encodeURIComponent(JSON.stringify(item)).length;
+    if (cur.length && (len + l > 5000 || cur.length >= 25)) { chunks.push(cur); cur = []; len = 0; }
+    cur.push({rec:r, item:item});
+    len += l;
+  });
+  if (cur.length) chunks.push(cur);
+  return chunks;
 }
 
 function toggleShowAllChiqim() {
   var btn = document.getElementById('chiqim-toggle-btn');
   var desc = document.getElementById('chiqim-jadval-desc');
-
   if (!showAllChiqim) {
     ensureFullHistoryLoaded(function() {
       showAllChiqim = true;
       btn.innerHTML = '📅 Faqat bugungini ko\'rsatish';
-      desc.innerHTML = 'Chiqarib yuborilgan barcha mahsulotlar ro\'yxati';
+      desc.innerHTML = 'Chiqarib yuborilgan barcha mahsulotlar (oxirgi ' + MAX_ROWS + ' tasi)';
       renderChiqim();
     });
     return;
   }
-
   showAllChiqim = false;
   btn.innerHTML = '🕓 Eski ma\'lumotlarni ko\'rsatish';
   desc.innerHTML = 'Bugun chiqarib yuborilgan mahsulotlar';
@@ -1833,37 +1575,40 @@ function toggleShowAllChiqim() {
 function renderChiqim() {
   var tb = document.getElementById('ch-tbody');
   var today = todayStr();
-  var rows = showAllChiqim ? chiqimData : chiqimData.filter(function(r) { return r.sana === today; });
+  // Saqlanmagan (pending) yozuvlar sanasidan qat'i nazar doim ko'rinadi
+  var rows = showAllChiqim ? chiqimData : chiqimData.filter(function(r) { return r.sana === today || r.pending; });
   if (!rows.length) {
     tb.innerHTML = '<tr><td colspan="10" class="empty"><span class="empty-icon">📭</span>' + (showAllChiqim ? 'Hozircha chiqim ma\'lumotlari yo\'q' : 'Bugun hech qanday chiqim qilinmagan') + '</td></tr>';
     return;
   }
+  var total = rows.length;
+  if (rows.length > MAX_ROWS) rows = rows.slice(-MAX_ROWS);
   var html = '';
   rows.forEach(function(r, i) {
     var key = String(r.id || r.bc);
-    var holatBadge = (r.holat === 'Yozildi' || r.holat === 'Sheets dan' || !r.pending)
-      ? '<span class="status-badge status-saved">✓ Yozildi</span>'
-      : r.holat === 'Xato'
-        ? '<span class="status-badge status-error">✕ Xato</span>'
-        : r.holat === 'Dublikat (allaqachon bor)'
-          ? '<span class="status-badge status-error">⚠ Dublikat</span>'
-          : '<span class="status-badge status-pending">⏳ Kutilmoqda</span>';
-    var delBtn = isOperator
-      ? '<button class="tbl-btn tbl-btn-del" onclick="deleteChiqim(\'' + key + '\')">Del</button>'
-      : '';
+    var holatBadge;
+    if (r.holat === 'Xato') holatBadge = '<span class="status-badge status-error">✕ Xato</span>';
+    else if (r.holat === 'Dublikat (allaqachon bor)') holatBadge = '<span class="status-badge status-error">⚠ Dublikat</span>';
+    else if (r.holat === 'Yuborilmoqda...') holatBadge = '<span class="status-badge status-pending">📡 Yuborilmoqda</span>';
+    else if (r.pending) holatBadge = '<span class="status-badge status-pending">⏳ Kutilmoqda</span>';
+    else holatBadge = '<span class="status-badge status-saved">✓ Yozildi</span>';
+    var delBtn = isOperator ? '<button class="tbl-btn tbl-btn-del" onclick="deleteChiqim(\'' + key + '\')">Del</button>' : '';
     html += '<tr>'
-      + '<td style="color:#cbd5e1;font-weight:600">' + (i+1) + '</td>'
+      + '<td style="color:#cbd5e1;font-weight:600">' + (total - rows.length + i + 1) + '</td>'
       + '<td><span class="bc-badge">' + r.bc + '</span></td>'
-      + '<td style="font-family:monospace;font-size:11.5px;font-weight:700;color:#475569">' + r.trim + '</td>'
-      + '<td style="color:#64748b">' + r.sana + '</td>'
-      + '<td style="font-weight:500">' + r.buyer + '</td>'
-      + '<td><b>' + r.product + '</b></td>'
-      + '<td style="color:#64748b">' + r.color + '</td>'
-      + '<td><b style="color:#0f172a">' + r.qty + '</b></td>'
+      + '<td style="font-family:monospace;font-size:11.5px;font-weight:700;color:#475569">' + (r.trim||'') + '</td>'
+      + '<td style="color:#64748b">' + (r.sana||'') + '</td>'
+      + '<td style="font-weight:500">' + (r.buyer||r.client||'') + '</td>'
+      + '<td><b>' + (r.product||'') + '</b></td>'
+      + '<td style="color:#64748b">' + (r.color||'') + '</td>'
+      + '<td><b style="color:#0f172a">' + (r.qty||0) + '</b></td>'
       + '<td>' + holatBadge + '</td>'
       + '<td>' + delBtn + '</td>'
       + '</tr>';
   });
+  if (total > rows.length) {
+    html = '<tr><td colspan="10" class="more-rows">Jami ' + total + ' ta — oxirgi ' + rows.length + ' tasi ko\'rsatilmoqda</td></tr>' + html;
+  }
   tb.innerHTML = html;
 }
 
@@ -1871,17 +1616,20 @@ function deleteChiqim(id) {
   if (!confirm('Bu chiqimni o\'chirishni tasdiqlaysizmi?')) return;
   var row = chiqimData.find(function(r) { return String(r.id || r.bc) === id; });
   chiqimData = chiqimData.filter(function(r) { return String(r.id || r.bc) !== id; });
+  savePendingLocal();
   renderChiqim(); updateSaveBtn();
   toast('🗑 Chiqim o\'chirildi');
   if (row && !row.pending) {
     jsonp(OMBOR_URL, {action:'deleteChiqim', bc:row.bc}, function(err, d) {
       if (!err && d && d.status === 'ok') toast('✅ Sheets\'dan ham o\'chirildi');
+      else toast('⚠ Sheets\'dan o\'chirilmadi — sahifani yangilab tekshiring');
     });
   }
 }
 
+// ══════════════ BUGUNGI HISOBOT ══════════════
 function renderBugun() {
-  var today = new Date().toISOString().slice(0,10);
+  var today = todayStr();
   var rows = [], tk = 0, tc = 0;
   kirimData.filter(function(r) { return r.sana === today; }).forEach(function(r) {
     tk += parseInt(r.jami) || 0;
@@ -1906,76 +1654,72 @@ function renderBugun() {
     html += '<tr>'
       + '<td><span class="status-badge ' + (ik?'status-kirim':'status-chiqim') + '">' + (ik?'📥 Kirim':'📤 Chiqim') + '</span></td>'
       + '<td><span class="bc-badge">' + r.bc + '</span></td>'
-      + '<td style="font-family:monospace;font-size:11.5px;font-weight:700;color:#475569">' + r.trim + '</td>'
-      + '<td><b>' + r.product + '</b></td>'
-      + '<td style="color:#64748b">' + r.color + '</td>'
-      + '<td style="font-weight:500">' + r.who + '</td>'
-      + '<td><b style="color:' + (ik?'#10b981':'#ef4444') + ';font-size:14px">' + (ik?'+':'-') + r.qty + '</b></td>'
+      + '<td style="font-family:monospace;font-size:11.5px;font-weight:700;color:#475569">' + (r.trim||'') + '</td>'
+      + '<td><b>' + (r.product||'') + '</b></td>'
+      + '<td style="color:#64748b">' + (r.color||'') + '</td>'
+      + '<td style="font-weight:500">' + (r.who||'') + '</td>'
+      + '<td><b style="color:' + (ik?'#10b981':'#ef4444') + ';font-size:14px">' + (ik?'+':'-') + (r.qty||0) + '</b></td>'
       + '</tr>';
   });
   tb.innerHTML = html;
 }
 
+// ══════════════ CHOP ETISH ══════════════
 function doPrint(rows) {
-  if (!rows || !rows.length || !rows[0]) return;
+  rows = (rows || []).filter(Boolean);
+  if (!rows.length) return;
   var pa = document.getElementById('print-area');
   pa.innerHTML = '';
   var tmp = document.createElement('div');
   tmp.style.cssText = 'position:fixed;left:-9999px;top:0;width:200px';
   document.body.appendChild(tmp);
-  var srcs = [], done = 0;
-  rows.forEach(function(r, i) {
-    if (!r) { done++; return; }
+  var srcs = [];
+  rows.forEach(function(r) {
     var h = document.createElement('div');
     tmp.appendChild(h);
     try {
-      new QRCode(h, {text:r.bc, width:130, height:130,
+      new QRCode(h, {text:String(r.bc), width:130, height:130,
         colorDark:'#000', colorLight:'#fff', correctLevel:QRCode.CorrectLevel.M});
     } catch(e) {}
-    setTimeout(function() {
-      var c = h.querySelector('canvas');
-      srcs[i] = c ? c.toDataURL('image/png') : '';
-      done++;
-      if (done === rows.length) {
-        document.body.removeChild(tmp);
-        var html = '';
-        rows.forEach(function(r2, j) {
-          if (!r2) return;
-          var szArr = [];
-          if (r2.sizes) {
-            var sizeKeys = Object.keys(r2.sizes).filter(function(s){ return r2.sizes[s] > 0; });
-            sizeKeys.sort(function(a,b){
-              var na = Number(a), nb = Number(b);
-              if (!isNaN(na) && !isNaN(nb)) return na - nb;
-              return String(a).localeCompare(String(b));
-            });
-            sizeKeys.forEach(function(s) { szArr.push(s + '(' + r2.sizes[s] + ')'); });
-          }
-          html += '<div class="sticker">'
-            + '<div class="st-left">'
-            + '<div class="st-header">EGIN GROUP</div>'
-            + '<table class="st-table">'
-            + '<tr><td class="lbl">Штрихкод</td><td class="val bold">' + r2.bc + '</td></tr>'
-            + '<tr><td class="lbl">Номер заказа</td><td class="val">' + r2.trim + '</td></tr>'
-            + '<tr><td class="lbl">Дата</td><td class="val">' + r2.sana + '</td></tr>'
-            + '<tr><td class="lbl">Клиент</td><td class="val">' + r2.client + '</td></tr>'
-            + '<tr><td class="lbl">Наименования товара</td><td class="val">' + r2.product + '</td></tr>'
-            + '<tr><td class="lbl">Цвет</td><td class="val">' + r2.color + '</td></tr>'
-            + (szArr.length ? '<tr><td class="lbl">Размер</td><td class="val" style="font-size:10pt;font-weight:600">' + szArr.join(' ') + '</td></tr>' : '')
-            + '<tr><td class="lbl">Итого</td><td class="val bold">' + r2.jami + ' шт</td></tr>'
-            + '<tr><td class="lbl">Кг</td><td class="val">' + r2.kg + '</td></tr>'
-            + '</table></div>'
-            + '<div class="st-right">'
-            + (srcs[j] ? '<img src="' + srcs[j] + '" style="width:28mm;height:28mm">' : '<b>' + r2.bc + '</b>')
-            + '<div class="st-bc">' + r2.bc + '</div>'
-            + '<div class="st-qr-lbl">QR Kod</div>'
-            + '</div></div>';
-        });
-        pa.innerHTML = html;
-        setTimeout(function() { window.print(); }, 200);
-      }
-    }, 400);
+    var c = h.querySelector('canvas');
+    srcs.push(c ? c.toDataURL('image/png') : '');
   });
+  document.body.removeChild(tmp);
+
+  var html = '';
+  rows.forEach(function(r2, j) {
+    var szArr = [];
+    if (r2.sizes) {
+      var sizeKeys = Object.keys(r2.sizes).filter(function(s){ return r2.sizes[s] > 0; });
+      sizeKeys.sort(function(a,b){
+        var na = Number(a), nb = Number(b);
+        if (!isNaN(na) && !isNaN(nb)) return na - nb;
+        return String(a).localeCompare(String(b));
+      });
+      sizeKeys.forEach(function(s) { szArr.push(s + '(' + r2.sizes[s] + ')'); });
+    }
+    html += '<div class="sticker">'
+      + '<div class="st-left">'
+      + '<div class="st-header">EGIN GROUP</div>'
+      + '<table class="st-table">'
+      + '<tr><td class="lbl">Штрихкод</td><td class="val bold">' + r2.bc + '</td></tr>'
+      + '<tr><td class="lbl">Номер заказа</td><td class="val">' + (r2.trim||'') + '</td></tr>'
+      + '<tr><td class="lbl">Дата</td><td class="val">' + (r2.sana||'') + '</td></tr>'
+      + '<tr><td class="lbl">Клиент</td><td class="val">' + (r2.client||'') + '</td></tr>'
+      + '<tr><td class="lbl">Наименования товара</td><td class="val">' + (r2.product||'') + '</td></tr>'
+      + '<tr><td class="lbl">Цвет</td><td class="val">' + (r2.color||'') + '</td></tr>'
+      + (szArr.length ? '<tr><td class="lbl">Размер</td><td class="val" style="font-size:10pt;font-weight:600">' + szArr.join(' ') + '</td></tr>' : '')
+      + '<tr><td class="lbl">Итого</td><td class="val bold">' + (r2.jami||0) + ' шт</td></tr>'
+      + '<tr><td class="lbl">Кг</td><td class="val">' + (r2.kg||'') + '</td></tr>'
+      + '</table></div>'
+      + '<div class="st-right">'
+      + (srcs[j] ? '<img src="' + srcs[j] + '" style="width:28mm;height:28mm">' : '<b>' + r2.bc + '</b>')
+      + '<div class="st-bc">' + r2.bc + '</div>'
+      + '<div class="st-qr-lbl">QR Kod</div>'
+      + '</div></div>';
+  });
+  pa.innerHTML = html;
+  setTimeout(function() { window.print(); }, 200);
 }
 
 function buildKirimNakladnoy(rows) {
@@ -1989,8 +1733,8 @@ function buildKirimNakladnoy(rows) {
       groupOrder.push(key);
     }
     var g = grouped[key];
-    g.qopSoni += 1; g.jami += parseInt(r.jami) || 0; g.kg += parseFloat(r.kg) || 0;
-    if (r.sizes) Object.keys(r.sizes).forEach(function(s){ g.sizes[s] = (g.sizes[s]||0) + (r.sizes[s]||0); });
+    g.qopSoni += 1; g.jami += parseInt(r.jami) || 0; g.kg += parseFloat(String(r.kg||'').replace(',','.')) || 0;
+    if (r.sizes) Object.keys(r.sizes).forEach(function(s){ g.sizes[s] = (g.sizes[s]||0) + (parseInt(r.sizes[s])||0); });
   });
   var sizeSet = {};
   groupOrder.forEach(function(k){ Object.keys(grouped[k].sizes).forEach(function(s){
@@ -2020,12 +1764,12 @@ function buildKirimNakladnoy(rows) {
     }).join('');
     bodyHtml += '<tr>'
       + '<td style="text-align:center;border:1px solid #e2e8f0;padding:5px">'+(i+1)+'</td>'
-      + '<td style="font-family:monospace;border:1px solid #e2e8f0;padding:5px 7px;font-weight:700">'+g.trim+'</td>'
-      + '<td style="border:1px solid #e2e8f0;padding:5px 7px"><b>'+g.product+'</b></td>'
-      + '<td style="border:1px solid #e2e8f0;padding:5px 7px">'+g.color+'</td>'
+      + '<td style="font-family:monospace;border:1px solid #e2e8f0;padding:5px 7px;font-weight:700">'+(g.trim||'')+'</td>'
+      + '<td style="border:1px solid #e2e8f0;padding:5px 7px"><b>'+(g.product||'')+'</b></td>'
+      + '<td style="border:1px solid #e2e8f0;padding:5px 7px">'+(g.color||'')+'</td>'
       + szCells
       + '<td style="text-align:center;font-weight:700;border:1px solid #e2e8f0;padding:5px">'+g.jami+'</td>'
-      + '<td style="text-align:center;border:1px solid #e2e8f0;padding:5px">'+(g.kg||'')+'</td>'
+      + '<td style="text-align:center;border:1px solid #e2e8f0;padding:5px">'+(g.kg ? Math.round(g.kg*100)/100 : '')+'</td>'
       + '<td style="text-align:center;font-weight:700;border:1px solid #e2e8f0;padding:5px">'+g.qopSoni+'</td>'
       + '</tr>';
   });
@@ -2042,7 +1786,7 @@ function buildKirimNakladnoy(rows) {
     + '<td colspan="4" style="font-weight:700;background:#0f172a;color:#fff;border:1px solid #334155;padding:6px;text-align:center">JAMI</td>'
     + totCells
     + '<td style="text-align:center;font-weight:700;background:#0f172a;color:#fff;border:1px solid #334155;padding:6px">'+totalJami+'</td>'
-    + '<td style="text-align:center;background:#0f172a;color:#fff;border:1px solid #334155;padding:6px">'+totalKg+'</td>'
+    + '<td style="text-align:center;background:#0f172a;color:#fff;border:1px solid #334155;padding:6px">'+(Math.round(totalKg*100)/100)+'</td>'
     + '<td style="text-align:center;font-weight:700;background:#0f172a;color:#fff;border:1px solid #334155;padding:6px">'+totalQop+'</td>'
     + '</tr></tfoot></table>'
     + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px">'
@@ -2061,8 +1805,16 @@ function toast(msg) {
   var t = document.getElementById('toast');
   t.innerHTML = msg;
   t.classList.add('show');
-  setTimeout(function() { t.classList.remove('show'); }, 3200);
+  clearTimeout(t._timer);
+  t._timer = setTimeout(function() { t.classList.remove('show'); }, 3200);
 }
+
+// Saqlanmagan chiqim bo'lsa, sahifani yopishdan oldin ogohlantiramiz
+window.addEventListener('beforeunload', function(e) {
+  if (chiqimData.some(function(r) { return r.pending; })) {
+    e.preventDefault(); e.returnValue = '';
+  }
+});
 
 updateSizeGrid();
 loadFromSheets();
